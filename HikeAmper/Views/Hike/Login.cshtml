@@ -1,0 +1,25 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<h2>Please login to add hikes</h2>
+
+    <div class="jumbotron">
+        <h1>HikeAmper</h1>
+        <p class="lead">This application allows you to aggregate information about all interested hikes to help you choose a hike.</p>
+    </div>
+
+
+    <div class="row">
+        @using (Html.BeginForm("Add", "Hike"))
+        {
+            <div class="col-md-4">
+                <h2>Add a hike</h2>
+                <p>
+                    Find a hike from WTA and add it to the list of your hikes.
+                </p>
+                <input type="text" name="hikeUrl" />
+                <input type="submit" class="btn btn-primary" name="Go" value="Go" />
+            </div>
+        }
+    </div>

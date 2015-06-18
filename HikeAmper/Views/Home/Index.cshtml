@@ -1,0 +1,105 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<h2>@ViewBag.message</h2>
+
+<div class="jumbotron">
+    <h1>HikeAmper</h1>
+    <p class="lead">This application allows you to aggregate information about all interested hikes to help you choose a hike.</p>
+</div>
+
+
+<div class="row">
+    @using (Html.BeginForm("Add", "Hike"))
+    {
+        <div class="col-md-4">
+            <h2>Add a hike</h2>
+            <p>
+                Find a hike from WTA and add it to the list of your hikes.
+            </p>
+            <input type="text" name="hikeUrl" />
+            <input type="submit" class="btn btn-primary" name="Go" value="Go" />
+        </div>
+    }
+</div>
+
+<h2>My Hike Details</h2>
+
+@model IEnumerable<HikeAmper.Models.HikeSummary>
+
+@if (Model.Count() > 0)
+{
+    <table class="table">
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>
+                Round Trip<br />
+                (In miles)
+            </th>
+            <th>
+                Elevation<br />
+                (In feet)
+            </th>
+            @foreach (var detail in Model.First().weatherDetails)
+            {
+                <th>
+                    Weather<br />
+                    @String.Format("{0}, {1} {2}", @detail.date.weekday_short, @detail.date.monthname_short, @detail.date.day)
+                </th>
+            }
+            <th>
+                Distance<br />
+                (In miles)
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @item.hikeDetails.name
+                </td>
+                <td>
+                    @item.hikeDetails.roundTripLength
+                </td>
+                <td>
+                    @item.hikeDetails.elevation
+                </td>
+                @foreach (var weather in @item.weatherDetails)
+                {
+                    <td>
+                        @String.Format("Rain  -  {0}%", @weather.pop)<br />
+                        <table class="table-condensed">
+                            <tr>
+                                <th>High</th>
+                                <th>Low</th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    @String.Format("{0}°C", @weather.high.celsius)
+                                </td>
+                                <td>
+                                    @String.Format("{0}°C", @weather.low.celsius)
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                }
+                <td>
+                    Coming Soon
+                </td>
+            </tr>
+        }
+
+    </table>
+}
+else
+{
+    <h2>No hikes found in your account.</h2>
+    <p>
+        Please add hikes before trying to view details about hikes.
+    </p>
+}
