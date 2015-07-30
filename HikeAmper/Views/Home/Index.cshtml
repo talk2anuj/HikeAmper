@@ -51,16 +51,19 @@
                 </th>
             }
             <th>
-                Distance<br />
-                (In miles)
+                Latest Trip Report<br />
             </th>
+            <th>
+                Distance<br/>
+                (In miles)
+            </th>            
         </tr>
 
         @foreach (var item in Model)
         {
             <tr>
                 <td>
-                    @item.hikeDetails.name
+                    <a href=@item.hikeDetails.url>@item.hikeDetails.name</a>                    
                 </td>
                 <td>
                     @item.hikeDetails.roundTripLength
@@ -88,6 +91,14 @@
                         </table>
                     </td>
                 }
+                <td>
+                    <a href=@item.hikeDetails.TripReportsUrl>Date: @item.hikeDetails.TripReport.Date</a><br/>
+                    @item.hikeDetails.TripReport.TypeOfHike <br/>
+                    @item.hikeDetails.TripReport.TrailCondition <br/>
+                    @item.hikeDetails.TripReport.SnowCondition <br/>
+                    @item.hikeDetails.TripReport.RoadCondition <br/>
+                    @item.hikeDetails.TripReport.BugsCondition <br/>
+                </td>
                 <td>
                     Coming Soon
                 </td>

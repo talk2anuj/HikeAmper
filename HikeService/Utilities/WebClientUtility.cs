@@ -9,27 +9,43 @@ namespace HikeService.Utilities
     {
         public static HtmlDocument GetHtmlDocument(string url)
         {
-            HtmlDocument doc = new HtmlDocument();
-            WebClient client = new WebClient();
-            string htmlData = client.DownloadString(url);
-            doc.LoadHtml(htmlData);
-            return doc;
+            try
+            {
+                HtmlDocument doc = new HtmlDocument();
+                WebClient client = new WebClient();
+                string htmlData = client.DownloadString(url);
+                doc.LoadHtml(htmlData);
+                return doc;
+            }
+            catch (Exception e)
+            {
+                //Log errors using something
+                return null;
+            }
         }
 
         public static string GetJsonString(string url)
         {
-            WebRequest request = WebRequest.Create(url);
-            WebResponse response = request.GetResponse();
-            Stream dataStream = response.GetResponseStream();
-            // Open the stream using a StreamReader for easy access.
-            string responseFromServer = null;
-            if (dataStream != null)
+            try
             {
-                StreamReader reader = new StreamReader(dataStream);
-                // Read the content.
-                responseFromServer = reader.ReadToEnd();
+                WebRequest request = WebRequest.Create(url);
+                WebResponse response = request.GetResponse();
+                Stream dataStream = response.GetResponseStream();
+                // Open the stream using a StreamReader for easy access.
+                string responseFromServer = null;
+                if (dataStream != null)
+                {
+                    StreamReader reader = new StreamReader(dataStream);
+                    // Read the content.
+                    responseFromServer = reader.ReadToEnd();
+                }
+                return responseFromServer;
             }
-            return responseFromServer;
+            catch (Exception e)
+            {
+                //Log error
+            }
+            return null;
         }
     }
 }
