@@ -26,13 +26,33 @@ namespace HikeAmper.Controllers
                 var data = "{\"Value\":\"" + hikeUrl + "\"";
                 writer.Write(data);
                 writer.Flush();
-                var response = request.GetResponse();
+                request.GetResponse();
                 return RedirectToAction("MyHikeDetails", "Hike");
             }
             else
             {
                 return View("Login");
             }
+        }
+
+        public ActionResult Delete(FormCollection form)
+        {
+            if (!String.IsNullOrEmpty(User.Identity.Name))
+            {
+                var userName = getUserName(User.Identity.Name);
+                WebRequest request =
+                    WebRequest.Create("http://hikeservice.azurewebsites.net/hikes/" + userName);
+                request.Method = "DELETE";
+                request.ContentType = "application/json";
+                var writer = new StreamWriter(request.GetRequestStream());
+                var hikeUrl = form["hikeUrl"];
+                var data = "{\"Value\":\"" + hikeUrl + "\"";
+                writer.Write(data);
+                writer.Flush();
+                request.GetResponse();
+                return RedirectToAction("MyHikeDetails", "Hike");
+            }
+            return View("Login");
         }
 
         public ActionResult MyHikeDetails(FormCollection form)
@@ -50,10 +70,7 @@ namespace HikeAmper.Controllers
                 HikeSummary[] myHikesData = JsonConvert.DeserializeObject<HikeSummary[]>(responseData);
                 return View("../Home/Index", myHikesData.ToList());
             }
-            else
-            {
-                return View("Login");
-            }
+            return View("Login");
         }
 
         public class UserData

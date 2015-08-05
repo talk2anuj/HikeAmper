@@ -8,8 +8,6 @@ namespace HikeService.MapsModule.Services
 {
     public interface MapsService
     {
-        MapDetails GetMapDetails(PhysicalAddress source, GeographicalLocation destination);
-
-        MapDetails GetMapDetails();
+        MapDetails GetMapDetails(GeographicalLocation destination);
     }
 }

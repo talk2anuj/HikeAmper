@@ -9,6 +9,7 @@ namespace HikeAmper.Models
     {
         public HikeDetails hikeDetails { get; set; }
         public WeatherDetails[] weatherDetails { get; set; }
+        public MapDetails MapDetails { get; set; }
     }
 
     public class HikeDetails
@@ -74,5 +75,11 @@ namespace HikeAmper.Models
         public string RoadCondition { get; set; }
         public string BugsCondition { get; set; }
         public string Url { get; set; }
+    }
+
+    public class MapDetails
+    {
+        public string Distance { get; set; }
+        public string Duration { get; set; }
     }
 }

@@ -1,12 +1,41 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
+﻿
 namespace HikeService.MapsModule.Models
 {
     public class MapDetails
     {
-        public double Distance { get; set; }
+        public string Distance { get; set; }
+        public string Duration { get; set; }
+
+        public MapDetails(string distance, string duration)
+        {
+            Distance = distance;
+            Duration = duration;
+        }
+    }
+
+    public class DistanceAndDuration
+    {
+        public Routes[] routes { get; set; }
+    }
+
+    public class Routes
+    {
+        public Legs[] legs { get; set; }
+    }
+
+    public class Legs
+    {
+        public Distance distance { get; set; }
+        public Duration duration { get; set; }
+    }
+
+    public class Distance
+    {
+        public string text { get; set; }
+    }
+
+    public class Duration
+    {
+        public string text { get; set; }
     }
 }

@@ -24,12 +24,12 @@
     }
 </div>
 
-<h2>My Hike Details</h2>
-
 @model IEnumerable<HikeAmper.Models.HikeSummary>
 
 @if (Model.Count() > 0)
 {
+    <h2>My Hike Details</h2>
+    
     <table class="table">
         <tr>
             <th>
@@ -63,7 +63,7 @@
         {
             <tr>
                 <td>
-                    <a href=@item.hikeDetails.url>@item.hikeDetails.name</a>                    
+                    <a href=@item.hikeDetails.url target="_blank">@item.hikeDetails.name</a>                    
                 </td>
                 <td>
                     @item.hikeDetails.roundTripLength
@@ -98,10 +98,18 @@
                     @item.hikeDetails.TripReport.SnowCondition <br/>
                     @item.hikeDetails.TripReport.RoadCondition <br/>
                     @item.hikeDetails.TripReport.BugsCondition <br/>
-                    <a href=@item.hikeDetails.TripReportsUrl target="_blank">Other Reports</a>
+                    <a href=@item.hikeDetails.TripReportsUrl target="_blank">Other Reports</a><br/>
                 </td>
                 <td>
-                    Coming Soon
+                    @item.MapDetails.Distance<br/>
+                    @item.MapDetails.Duration<br/>
+                </td>
+                <td>
+                    @using (Html.BeginForm("Delete", "Hike"))
+                    {
+                        <input type="hidden" name="hikeUrl" value="@item.hikeDetails.url"/>
+                        <input type="image" src="~/Images/trash.png" name="Delete" value="Delete" />
+                    }
                 </td>
             </tr>
         }

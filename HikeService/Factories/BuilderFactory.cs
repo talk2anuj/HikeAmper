@@ -14,7 +14,7 @@ namespace HikeService.Factories
         {
             _hikeSummaryBuilder.HikeDetailsService = ServiceFactory.GetHikeDetailsService();
             _hikeSummaryBuilder.WeatherDetailsService = ServiceFactory.GetWeatherDetailsService();
-//            _hikeSummaryBuilder.MapsService = ServiceFactory.GetMapsService();
+            _hikeSummaryBuilder.MapsService = ServiceFactory.GetMapsService();
             return _hikeSummaryBuilder;
         }
 	}

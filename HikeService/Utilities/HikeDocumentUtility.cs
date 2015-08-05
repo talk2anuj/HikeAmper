@@ -169,8 +169,8 @@ namespace HikeService.Utilities
             try
             {
                 var dateText = doc.DocumentNode.SelectSingleNode("//span[contains(@class, '" + _date + "')]").InnerText;
-                dateText = dateText.Substring(dateText.IndexOf("on", StringComparison.OrdinalIgnoreCase) + "on".Length);
-                date = Regex.Replace(dateText, @"\s+", "").Split('(')[0];
+                dateText = dateText.Substring(dateText.IndexOf(", on", StringComparison.OrdinalIgnoreCase) + ", on".Length);
+                date = dateText.Split('(')[0].Trim();
             }
             catch (Exception e)
             {
