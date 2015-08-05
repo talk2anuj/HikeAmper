@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Text.RegularExpressions;
 using HikeService.HikesModule.Models;
 using HikeService.MapsModule.Models;
 using HtmlAgilityPack;
@@ -124,35 +125,58 @@ namespace HikeService.Utilities
         private static void PopulateTripReportDetails(TripReportDetails tripReportDetails, string url)
         {
             HtmlDocument doc = WebClientUtility.GetHtmlDocument(url);
-            var dateText = doc.DocumentNode.SelectSingleNode("//span[@class='" + _date + "']").InnerText;
-            tripReportDetails.Date = dateText.Substring(dateText.IndexOf("on", StringComparison.OrdinalIgnoreCase) + "on".Length);
+            tripReportDetails.Url = url;
+            tripReportDetails.Date = GetTripReportDate(tripReportDetails, doc);
             var node = doc.GetElementbyId("trip-conditions");
             var conditions = node.Descendants("div");
             foreach (var condition in conditions)
             {
-                var nodeTypeText = condition.SelectSingleNode("h4").InnerText;
-                var nodeValueText = condition.SelectSingleNode("span").InnerText;
-                if (_typeOfHike.Equals(nodeTypeText))
+                try
                 {
-                    tripReportDetails.TypeOfHike = nodeValueText;
+                    var nodeTypeText = condition.SelectSingleNode("h4").InnerText;
+                    var nodeValueText = condition.SelectSingleNode("span").InnerText;
+                    if (_typeOfHike.Equals(nodeTypeText))
+                    {
+                        tripReportDetails.TypeOfHike = nodeValueText;
+                    }
+                    if (_trail.Equals(nodeTypeText))
+                    {
+                        tripReportDetails.TrailCondition = nodeValueText;
+                    }
+                    if (_road.Equals(nodeTypeText))
+                    {
+                        tripReportDetails.RoadCondition = nodeValueText;
+                    }
+                    if (_bugs.Equals(nodeTypeText))
+                    {
+                        tripReportDetails.BugsCondition = nodeValueText;
+                    }
+                    if (_snow.Equals(nodeTypeText))
+                    {
+                        tripReportDetails.SnowCondition = nodeValueText;
+                    }
                 }
-                if (_trail.Equals(nodeTypeText))
+                catch (Exception e)
                 {
-                    tripReportDetails.TrailCondition = nodeValueText;
-                }
-                if (_road.Equals(nodeTypeText))
-                {
-                    tripReportDetails.RoadCondition = nodeValueText;
-                }
-                if (_bugs.Equals(nodeTypeText))
-                {
-                    tripReportDetails.BugsCondition = nodeValueText;
-                }
-                if (_snow.Equals(nodeTypeText))
-                {
-                    tripReportDetails.SnowCondition = nodeValueText;
+                    //Log error
                 }
             }
+        }
+
+        private static string GetTripReportDate(TripReportDetails tripReportDetails, HtmlDocument doc)
+        {
+            var date = "";
+            try
+            {
+                var dateText = doc.DocumentNode.SelectSingleNode("//span[contains(@class, '" + _date + "')]").InnerText;
+                dateText = dateText.Substring(dateText.IndexOf("on", StringComparison.OrdinalIgnoreCase) + "on".Length);
+                date = Regex.Replace(dateText, @"\s+", "").Split('(')[0];
+            }
+            catch (Exception e)
+            {
+                //Log errors
+            }
+            return date;
         }
     }
 }

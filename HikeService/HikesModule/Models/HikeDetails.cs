@@ -22,6 +22,7 @@ namespace HikeService.HikesModule.Models
         public string TrailCondition { get; set; }
         public string SnowCondition { get; set; }
         public string RoadCondition { get; set; }
-        public string BugsCondition { get; set; }        
+        public string BugsCondition { get; set; }
+        public string Url { get; set; }
     }
 }

@@ -13,7 +13,7 @@ namespace HikeService.HikesModule.Services.impl
 			//scrape data from WTA
 			HtmlDocument hikeDoc = WebClientUtility.GetHtmlDocument(url);
             HtmlDocument tripReportDoc = WebClientUtility.GetHtmlDocument(url + TRIP_REPORT_URL_EXTENSION);
-            HikeDetails hikeDetails = PopulateHikeDetails(url, hikeDoc, tripReportDoc);           
+            HikeDetails hikeDetails = PopulateHikeDetails(url, hikeDoc, tripReportDoc);
 			return hikeDetails;
 		}
 

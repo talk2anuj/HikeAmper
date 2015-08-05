@@ -73,5 +73,6 @@ namespace HikeAmper.Models
         public string SnowCondition { get; set; }
         public string RoadCondition { get; set; }
         public string BugsCondition { get; set; }
+        public string Url { get; set; }
     }
 }
