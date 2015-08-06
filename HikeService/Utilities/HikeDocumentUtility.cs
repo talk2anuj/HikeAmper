@@ -106,27 +106,39 @@ namespace HikeService.Utilities
             return location;
         }
 
-        public static TripReportDetails GetTripReportDetails(HtmlDocument doc)
+        public static HikeDetails GetHikeDetails(string url, HtmlDocument doc)
         {
-            TripReportDetails tripReportDetails = new TripReportDetails();
+            var hikeDetails = new HikeDetails();
+            hikeDetails.Url = url;
+            hikeDetails.Name = HikeDocumentUtility.GetName(doc);
+            hikeDetails.Elevation = HikeDocumentUtility.GetElevation(doc);
+            hikeDetails.RoundTripLength = HikeDocumentUtility.GetRoundTripLength(doc);
+            hikeDetails.Location = HikeDocumentUtility.GetLocation(doc);
+            hikeDetails.TripReportsUrl = url + "/@@related_tripreport_listing";
+            return hikeDetails;
+        }
+
+        public static TripDetails GetTripReportDetails(HtmlDocument doc)
+        {
+            TripDetails tripDetails = new TripDetails();
             try
             {
                 var node = doc.DocumentNode.SelectSingleNode("//a[contains(@class,'full-report-link')]");
                 var latestTripReportUrl = node.Attributes["href"].Value;
-                PopulateTripReportDetails(tripReportDetails, latestTripReportUrl);
+                PopulateTripReportDetails(tripDetails, latestTripReportUrl);
             }
             catch (Exception e)
             {
                 //Log error
             }
-            return tripReportDetails;
+            return tripDetails;
         }
 
-        private static void PopulateTripReportDetails(TripReportDetails tripReportDetails, string url)
+        private static void PopulateTripReportDetails(TripDetails tripDetails, string url)
         {
             HtmlDocument doc = WebClientUtility.GetHtmlDocument(url);
-            tripReportDetails.Url = url;
-            tripReportDetails.Date = GetTripReportDate(tripReportDetails, doc);
+            tripDetails.Url = url;
+            tripDetails.Date = GetTripReportDate(tripDetails, doc);
             var node = doc.GetElementbyId("trip-conditions");
             var conditions = node.Descendants("div");
             foreach (var condition in conditions)
@@ -137,23 +149,23 @@ namespace HikeService.Utilities
                     var nodeValueText = condition.SelectSingleNode("span").InnerText;
                     if (_typeOfHike.Equals(nodeTypeText))
                     {
-                        tripReportDetails.TypeOfHike = nodeValueText;
+                        tripDetails.TypeOfHike = nodeValueText;
                     }
                     if (_trail.Equals(nodeTypeText))
                     {
-                        tripReportDetails.TrailCondition = nodeValueText;
+                        tripDetails.TrailCondition = nodeValueText;
                     }
                     if (_road.Equals(nodeTypeText))
                     {
-                        tripReportDetails.RoadCondition = nodeValueText;
+                        tripDetails.RoadCondition = nodeValueText;
                     }
                     if (_bugs.Equals(nodeTypeText))
                     {
-                        tripReportDetails.BugsCondition = nodeValueText;
+                        tripDetails.BugsCondition = nodeValueText;
                     }
                     if (_snow.Equals(nodeTypeText))
                     {
-                        tripReportDetails.SnowCondition = nodeValueText;
+                        tripDetails.SnowCondition = nodeValueText;
                     }
                 }
                 catch (Exception e)
@@ -163,7 +175,7 @@ namespace HikeService.Utilities
             }
         }
 
-        private static string GetTripReportDate(TripReportDetails tripReportDetails, HtmlDocument doc)
+        private static string GetTripReportDate(TripDetails tripDetails, HtmlDocument doc)
         {
             var date = "";
             try

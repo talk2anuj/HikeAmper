@@ -1,15 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace HikeAmper.Models
+﻿namespace HikeAmper.Models
 {
     public class HikeSummary
     {
-        public HikeDetails hikeDetails { get; set; }
-        public WeatherDetails[] weatherDetails { get; set; }
+        public HikeAndTripDetails HikeAndTripDetails { get; set; }
+        public WeatherDetails[] WeatherDetails { get; set; }
         public MapDetails MapDetails { get; set; }
+    }
+
+    public class HikeAndTripDetails
+    {
+        public HikeDetails HikeDetails { get; set; }
+        public TripDetails TripDetails { get; set; }
+
     }
 
     public class HikeDetails
@@ -19,7 +21,6 @@ namespace HikeAmper.Models
         public double roundTripLength { get; set; }
         public double elevation { get; set; }
         public LocationDetails location { get; set; }
-        public TripReportDetails TripReport { get; set; }
         public string TripReportsUrl { get; set; }
     }
 
@@ -66,7 +67,7 @@ namespace HikeAmper.Models
         public int degrees { get; set; }
     }
 
-    public class TripReportDetails
+    public class TripDetails
     {
         public string Date { get; set; }
         public string TypeOfHike { get; set; }

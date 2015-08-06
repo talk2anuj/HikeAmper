@@ -1,21 +1,25 @@
-﻿
-
-using HikeService.MapsModule.Models;
+﻿using HikeService.MapsModule.Models;
 
 namespace HikeService.HikesModule.Models
 {
-	public class HikeDetails
+	public class HikeAndTripDetails
 	{
-		public string Url { get; set; }
-		public string Name { get; set; }
-		public double RoundTripLength { get; set; }
-		public double Elevation { get; set; }
-        public GeographicalLocation Location { get; set; }
-        public TripReportDetails TripReport { get; set; }
-        public string TripReportsUrl { get; set; }
+        public HikeDetails HikeDetails { get; set; }
+        public TripDetails TripDetails { get; set; }
+
 	}
 
-    public class TripReportDetails
+    public class HikeDetails
+    {
+        public string Url { get; set; }
+        public string Name { get; set; }
+        public double RoundTripLength { get; set; }
+        public double Elevation { get; set; }
+        public GeographicalLocation Location { get; set; }
+        public string TripReportsUrl { get; set; }
+    }
+
+    public class TripDetails
     {
         public string Date { get; set; }
         public string TypeOfHike { get; set; }

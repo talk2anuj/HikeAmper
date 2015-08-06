@@ -5,6 +5,7 @@ namespace HikeService.HikesModule.Services
 {
 	public interface HikeDetailsService
 	{
-		HikeDetails GetInformation(String url);
+		HikeDetails GetHikeInformation(String url);
+        TripDetails GetTripInformation(String url);
 	}
 }

@@ -60,6 +60,9 @@
     <Reference Include="Microsoft.WindowsAzure.Storage">
       <HintPath>..\packages\WindowsAzure.Storage.4.3.0\lib\net40\Microsoft.WindowsAzure.Storage.dll</HintPath>
     </Reference>
+    <Reference Include="StackExchange.Redis">
+      <HintPath>..\packages\StackExchange.Redis.1.0.481\lib\net45\StackExchange.Redis.dll</HintPath>
+    </Reference>
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Spatial, Version=5.6.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -103,6 +106,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Utilities\CacheUtility.cs" />
+    <Compile Include="CacheModule\Services\CacheService.cs" />
+    <Compile Include="CacheModule\Services\impl\GoogleMapsCacheService.cs" />
+    <Compile Include="CacheModule\Services\impl\WtaTripCacheService.cs" />
+    <Compile Include="CacheModule\Services\impl\WeatherUndergroundCacheService.cs" />
+    <Compile Include="CacheModule\Services\impl\WtaHikeCacheService.cs" />
     <Compile Include="Factories\BuilderFactory.cs" />
     <Compile Include="Factories\ServiceFactory.cs" />
     <Compile Include="Global.asax.cs">
@@ -110,7 +119,7 @@
     </Compile>
     <Compile Include="HikesModule\Builders\HikeSummaryBuilder.cs" />
     <Compile Include="HikesModule\Controllers\HikesController.cs" />
-    <Compile Include="HikesModule\Models\HikeDetails.cs" />
+    <Compile Include="HikesModule\Models\HikeAndTripDetails.cs" />
     <Compile Include="HikesModule\Models\HikeSummary.cs" />
     <Compile Include="HikesModule\Services\HikeDetailsService.cs" />
     <Compile Include="HikesModule\Services\impl\WtaHikeDetailsService.cs" />

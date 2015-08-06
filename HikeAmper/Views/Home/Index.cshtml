@@ -36,14 +36,14 @@
                 Name
             </th>
             <th>
-                Round Trip<br />
+                Round tripDetails<br />
                 (In miles)
             </th>
             <th>
                 Elevation<br />
                 (In feet)
             </th>
-            @foreach (var detail in Model.First().weatherDetails)
+            @foreach (var detail in Model.First().WeatherDetails)
             {
                 <th>
                     Weather<br />
@@ -51,7 +51,7 @@
                 </th>
             }
             <th>
-                Latest Trip Report<br />
+                Latest tripDetails Report<br />
             </th>
             <th>
                 Distance<br/>
@@ -63,15 +63,15 @@
         {
             <tr>
                 <td>
-                    <a href=@item.hikeDetails.url target="_blank">@item.hikeDetails.name</a>                    
+                    <a href=@item.HikeAndTripDetails.HikeDetails.url target="_blank">@item.HikeAndTripDetails.HikeDetails.name</a>                    
                 </td>
                 <td>
-                    @item.hikeDetails.roundTripLength
+                    @item.HikeAndTripDetails.HikeDetails.roundTripLength
                 </td>
                 <td>
-                    @item.hikeDetails.elevation
+                    @item.HikeAndTripDetails.HikeDetails.elevation
                 </td>
-                @foreach (var weather in @item.weatherDetails)
+                @foreach (var weather in @item.WeatherDetails)
                 {
                     <td>
                         @String.Format("Rain  -  {0}%", @weather.pop)<br />
@@ -92,13 +92,13 @@
                     </td>
                 }
                 <td>
-                    <a href=@item.hikeDetails.TripReport.Url target="_blank">@item.hikeDetails.TripReport.Date</a><br/>
-                    @item.hikeDetails.TripReport.TypeOfHike <br/>
-                    @item.hikeDetails.TripReport.TrailCondition <br/>
-                    @item.hikeDetails.TripReport.SnowCondition <br/>
-                    @item.hikeDetails.TripReport.RoadCondition <br/>
-                    @item.hikeDetails.TripReport.BugsCondition <br/>
-                    <a href=@item.hikeDetails.TripReportsUrl target="_blank">Other Reports</a><br/>
+                    <a href=@item.HikeAndTripDetails.TripDetails.Url target="_blank">@item.HikeAndTripDetails.TripDetails.Date</a><br/>
+                    @item.HikeAndTripDetails.TripDetails.TypeOfHike <br/>
+                    @item.HikeAndTripDetails.TripDetails.TrailCondition <br/>
+                    @item.HikeAndTripDetails.TripDetails.SnowCondition <br/>
+                    @item.HikeAndTripDetails.TripDetails.RoadCondition <br/>
+                    @item.HikeAndTripDetails.TripDetails.BugsCondition <br/>
+                    <a href=@item.HikeAndTripDetails.HikeDetails.TripReportsUrl target="_blank">Other Reports</a><br/>
                 </td>
                 <td>
                     @item.MapDetails.Distance<br/>
@@ -107,7 +107,7 @@
                 <td>
                     @using (Html.BeginForm("Delete", "Hike"))
                     {
-                        <input type="hidden" name="hikeUrl" value="@item.hikeDetails.url"/>
+                        <input type="hidden" name="hikeUrl" value="@item.HikeAndTripDetails.HikeDetails.url"/>
                         <input type="image" src="~/Images/trash.png" name="Delete" value="Delete" />
                     }
                 </td>
