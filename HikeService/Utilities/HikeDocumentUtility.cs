@@ -20,6 +20,7 @@ namespace HikeService.Utilities
         private static string _snow = "Snow";
         private static string _date = "date-and-author";
         private static string _notAvailable = "Not Available";
+        private static string _passRequiredInfo = "pass-required-info";
 
 
         public static T GetInfoFromDocument<T>(Func<HtmlDocument, T> func, HtmlDocument doc)
@@ -49,20 +50,29 @@ namespace HikeService.Utilities
             return name;
         }
 
-        public static double GetElevation(HtmlDocument doc)
+        public static ElevationDetails GetElevationDetails(HtmlDocument doc)
         {
-            var elevation = 0.0;
+            var elevationDetails = new ElevationDetails();
             try
             {
                 var element = doc.GetElementbyId(_hikeStats);
                 var nodes = element.Descendants("div").Where(d => d.Attributes.Contains("class"));
                 foreach (var node in nodes)
                 {
-                    var text = node.InnerText;
                     if (node.InnerText.Contains("Elevation"))
                     {
-                        string elevationStr = node.SelectSingleNode("div").SelectSingleNode("span").InnerText;
-                        elevation = double.Parse(elevationStr);
+                        var innerNodes = node.SelectNodes("div");
+                        foreach(var innerNode in innerNodes)
+                        {
+                            if (innerNode.InnerText.Contains("Gain"))
+                            {
+                                elevationDetails.Gain = innerNode.SelectSingleNode("span").InnerText;
+                            }
+                            if (innerNode.InnerText.Contains("Highest"))
+                            {
+                                elevationDetails.HighestPoint = innerNode.SelectSingleNode("span").InnerText;
+                            }
+                        }
                     }
                 }
             }
@@ -70,7 +80,7 @@ namespace HikeService.Utilities
             {
                 //Log error
             }
-            return elevation;
+            return elevationDetails;
         }
 
         public static double GetRoundTripLength(HtmlDocument doc)
@@ -110,12 +120,51 @@ namespace HikeService.Utilities
         {
             var hikeDetails = new HikeDetails();
             hikeDetails.Url = url;
-            hikeDetails.Name = HikeDocumentUtility.GetName(doc);
-            hikeDetails.Elevation = HikeDocumentUtility.GetElevation(doc);
-            hikeDetails.RoundTripLength = HikeDocumentUtility.GetRoundTripLength(doc);
-            hikeDetails.Location = HikeDocumentUtility.GetLocation(doc);
+            hikeDetails.Name = GetName(doc);
+            hikeDetails.ElevationDetails = GetElevationDetails(doc);
+            hikeDetails.RoundTripLength = GetRoundTripLength(doc);
+            hikeDetails.Location = GetLocation(doc);
+            hikeDetails.LocationName = GetLocationName(doc);
+            hikeDetails.PassRequired = GetPassRequiredInfo(doc);
             hikeDetails.TripReportsUrl = url + "/@@related_tripreport_listing";
             return hikeDetails;
+        }
+
+        private static string GetPassRequiredInfo(HtmlDocument doc)
+        {
+            var passRequiredInfo = "NA";
+            try
+            {
+                var element = doc.GetElementbyId(_passRequiredInfo);
+                passRequiredInfo = element.SelectSingleNode("a").InnerText;
+            }
+            catch (Exception e)
+            {
+                //Log error
+            }
+            return passRequiredInfo;
+        }
+
+        private static string GetLocationName(HtmlDocument doc)
+        {
+            var locationName = "NA";
+            try
+            {
+                var element = doc.GetElementbyId(_hikeStats);
+                var nodes = element.Descendants("div").Where(d => d.Attributes.Contains("class"));
+                foreach (var node in nodes)
+                {
+                    if (node.InnerText.Contains("Location"))
+                    {
+                        locationName = node.SelectSingleNode("div").InnerText;
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                //Log error
+            }
+            return locationName;
         }
 
         public static TripDetails GetTripReportDetails(HtmlDocument doc)

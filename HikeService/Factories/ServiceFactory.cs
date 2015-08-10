@@ -1,4 +1,5 @@
 ﻿using System.Configuration;
+using System.Net;
 using HikeService.CacheModule.Services;
 using HikeService.CacheModule.Services.impl;
 using HikeService.HikesModule.Services;
@@ -30,10 +31,10 @@ namespace HikeService.Factories
              _wtaHikeDetailsService = new WtaHikeDetailsService();
              _nationalWeatherDetailsService = new WeatherUndergroundService();
             _googleMapsService = new GoogleMapsService();
-            _weatherUndergroundCacheService = new WeatherUndergroundCacheService(GetWeatherCache());
-            _wtaHikeCacheService = new WtaHikeCacheService(GetHikeCache());
-            _googleMapsCacheService = new GoogleMapsCacheService(GetMapCache());
-            _tripCacheService = new WtaTripCacheService(GetTripCache());
+            _weatherUndergroundCacheService = new WeatherUndergroundCacheService("weathercache");
+            _wtaHikeCacheService = new WtaHikeCacheService("hikecache");
+            _googleMapsCacheService = new GoogleMapsCacheService("mapcache");
+            _tripCacheService = new WtaTripCacheService("tripcache");
 
          }
 
@@ -75,30 +76,6 @@ namespace HikeService.Factories
         public static CacheService GetTripCacheService()
         {
             return _tripCacheService;
-        }
-
-        private static IDatabase GetWeatherCache()
-        {
-            ConnectionMultiplexer connection = ConnectionMultiplexer.Connect(ConfigurationManager.ConnectionStrings["weathercache"].ConnectionString);
-            return connection.GetDatabase();
-        }
-
-        private static IDatabase GetHikeCache()
-        {
-            ConnectionMultiplexer connection = ConnectionMultiplexer.Connect(ConfigurationManager.ConnectionStrings["hikecache"].ConnectionString);
-            return connection.GetDatabase();
-        }
-
-        private static IDatabase GetMapCache()
-        {
-            ConnectionMultiplexer connection = ConnectionMultiplexer.Connect(ConfigurationManager.ConnectionStrings["mapcache"].ConnectionString);
-            return connection.GetDatabase();
-        }
-
-        private static IDatabase GetTripCache()
-        {
-            ConnectionMultiplexer connection = ConnectionMultiplexer.Connect(ConfigurationManager.ConnectionStrings["tripcache"].ConnectionString);
-            return connection.GetDatabase();
         }
     }
 }

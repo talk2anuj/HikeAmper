@@ -11,7 +11,7 @@ namespace HikeService.CacheModule.Services.impl
     {
         public override bool PopulateDetails(string hike, HikeSummary hikeSummary)
         {
-            var mapDetails = cache.StringGet(hike);
+            var mapDetails = Cache.StringGet(hike);
             if (mapDetails != RedisValue.Null)
             {
                 hikeSummary.MapDetails = JsonConvert.DeserializeObject<MapDetails>(mapDetails);
@@ -22,10 +22,11 @@ namespace HikeService.CacheModule.Services.impl
 
         public override void AddDetails(string hike, HikeSummary hikeSummary)
         {
-            cache.StringSet(hike, JsonConvert.SerializeObject(hikeSummary.MapDetails), TimeSpan.FromMinutes(CacheUtility.GetMinutesToExpiry()));
+            Cache.StringSet(hike, JsonConvert.SerializeObject(hikeSummary.MapDetails), TimeSpan.FromMinutes(CacheUtility.GetMinutesToExpiry()));
         }
 
-        public GoogleMapsCacheService(IDatabase cache) : base(cache)
+        public GoogleMapsCacheService(string cacheName)
+            : base(cacheName)
         {
         }
     }

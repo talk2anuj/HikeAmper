@@ -21,6 +21,10 @@ namespace HikeService.HikesModule.Builders
 			HikeSummary hikeSummary = new HikeSummary();
 		    hikeSummary.HikeAndTripDetails = new HikeAndTripDetails();
 		    var hike = GetHikeName(url);
+		    //HikeCacheService.ClearCache();
+		    //TripCacheService.ClearCache();
+		    //MapCacheService.ClearCache();
+		    //WeatherCacheService.ClearCache();
             if (!HikeCacheService.PopulateDetails(hike, hikeSummary))
 		    {
 		        hikeSummary.HikeAndTripDetails.HikeDetails = HikeDetailsService.GetHikeInformation(url);

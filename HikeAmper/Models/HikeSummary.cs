@@ -16,18 +16,26 @@
 
     public class HikeDetails
     {
-        public string url { get; set; }
-        public string name { get; set; }
-        public double roundTripLength { get; set; }
-        public double elevation { get; set; }
-        public LocationDetails location { get; set; }
+        public string Url { get; set; }
+        public string Name { get; set; }
+        public double RoundTripLength { get; set; }
+        public ElevationDetails ElevationDetails { get; set; }
+        public GeographicalLocation Location { get; set; }
         public string TripReportsUrl { get; set; }
+        public string PassRequired { get; set; }
+        public string LocationName { get; set; }
     }
 
-    public class LocationDetails
+    public class ElevationDetails
     {
-        public double latitude { get; set; }
-        public double longitude { get; set; }
+        public string Gain { get; set; }
+        public string HighestPoint { get; set; }
+    }
+
+    public class GeographicalLocation
+    {
+        public double Latitude { get; set; }
+        public double Longitude { get; set; }
     }
 
     public class WeatherDetails

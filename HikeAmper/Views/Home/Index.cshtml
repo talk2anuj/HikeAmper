@@ -36,6 +36,9 @@
                 Name
             </th>
             <th>
+                Location Name
+            </th>
+            <th>
                 Round tripDetails<br />
                 (In miles)
             </th>
@@ -51,30 +54,42 @@
                 </th>
             }
             <th>
-                Latest tripDetails Report<br />
+                Latest Trip Report<br />
             </th>
             <th>
                 Distance<br/>
                 (In miles)
-            </th>            
+            </th>
+            <th>
+                Pass Information
+            </th>
         </tr>
 
         @foreach (var item in Model)
         {
             <tr>
                 <td>
-                    <a href=@item.HikeAndTripDetails.HikeDetails.url target="_blank">@item.HikeAndTripDetails.HikeDetails.name</a>                    
+                    <a href=@item.HikeAndTripDetails.HikeDetails.Url target="_blank">@item.HikeAndTripDetails.HikeDetails.Name</a>
                 </td>
                 <td>
-                    @item.HikeAndTripDetails.HikeDetails.roundTripLength
+                    @item.HikeAndTripDetails.HikeDetails.LocationName
                 </td>
                 <td>
-                    @item.HikeAndTripDetails.HikeDetails.elevation
+                    <b>@item.HikeAndTripDetails.HikeDetails.RoundTripLength</b>
+                </td>
+                <td>
+                    Gain:
+                    <b>
+                        @item.HikeAndTripDetails.HikeDetails.ElevationDetails.Gain
+                    </b> <br/><br/>
+                    Highest Point:
+                    @item.HikeAndTripDetails.HikeDetails.ElevationDetails.HighestPoint<br/>
                 </td>
                 @foreach (var weather in @item.WeatherDetails)
                 {
                     <td>
-                        @String.Format("Rain  -  {0}%", @weather.pop)<br />
+                        <b>@String.Format("{0}", @weather.date.weekday_short)</b><br/><br/>
+                        @String.Format("Rain  -  {0}%", @weather.pop)<br/>
                         <table class="table-condensed">
                             <tr>
                                 <th>High</th>
@@ -97,18 +112,21 @@
                     @item.HikeAndTripDetails.TripDetails.TrailCondition <br/>
                     @item.HikeAndTripDetails.TripDetails.SnowCondition <br/>
                     @item.HikeAndTripDetails.TripDetails.RoadCondition <br/>
-                    @item.HikeAndTripDetails.TripDetails.BugsCondition <br/>
+                    @item.HikeAndTripDetails.TripDetails.BugsCondition <br/><br/>
                     <a href=@item.HikeAndTripDetails.HikeDetails.TripReportsUrl target="_blank">Other Reports</a><br/>
                 </td>
                 <td>
-                    @item.MapDetails.Distance<br/>
-                    @item.MapDetails.Duration<br/>
+                    @item.MapDetails.Distance<br/><br/>
+                    <b>@item.MapDetails.Duration</b><br/>
+                </td>
+                <td>
+                    @item.HikeAndTripDetails.HikeDetails.PassRequired
                 </td>
                 <td>
                     @using (Html.BeginForm("Delete", "Hike"))
                     {
-                        <input type="hidden" name="hikeUrl" value="@item.HikeAndTripDetails.HikeDetails.url"/>
-                        <input type="image" src="~/Images/trash.png" name="Delete" value="Delete" />
+                        <input type="hidden" name="hikeUrl" value="@item.HikeAndTripDetails.HikeDetails.Url"/>
+                        <input type="image" src="~/Images/trash.png" name="Delete" value="Delete"/>
                     }
                 </td>
             </tr>

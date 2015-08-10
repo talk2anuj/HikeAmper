@@ -8,13 +8,14 @@ namespace HikeService.CacheModule.Services.impl
 {
     public class WtaTripCacheService: CacheService
     {
-        public WtaTripCacheService(IDatabase cache) : base(cache)
+        public WtaTripCacheService(string cacheName)
+            : base(cacheName)
         {
         }
 
         public override bool PopulateDetails(string hike, HikeSummary hikeSummary)
         {
-            var tripDetails = cache.StringGet(hike);
+            var tripDetails = Cache.StringGet(hike);
             if (tripDetails != RedisValue.Null)
             {
                 hikeSummary.HikeAndTripDetails.TripDetails = JsonConvert.DeserializeObject<TripDetails>(tripDetails);
@@ -25,7 +26,7 @@ namespace HikeService.CacheModule.Services.impl
 
         public override void AddDetails(string hike, HikeSummary hikeSummary)
         {
-            cache.StringSet(hike, JsonConvert.SerializeObject(hikeSummary.HikeAndTripDetails.TripDetails), TimeSpan.FromMinutes(CacheUtility.GetMinutesToExpiry()));
+            Cache.StringSet(hike, JsonConvert.SerializeObject(hikeSummary.HikeAndTripDetails.TripDetails), TimeSpan.FromMinutes(CacheUtility.GetMinutesToExpiry()));
         }
     }
 }
