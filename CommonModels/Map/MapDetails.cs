@@ -15,27 +15,27 @@ namespace CommonModels.Map
 
     public class DistanceAndDuration
     {
-        public Routes[] routes { get; set; }
+        public Routes[] Routes { get; set; }
     }
 
     public class Routes
     {
-        public Legs[] legs { get; set; }
+        public Legs[] Legs { get; set; }
     }
 
     public class Legs
     {
-        public Distance distance { get; set; }
-        public Duration duration { get; set; }
+        public Distance Distance { get; set; }
+        public Duration Duration { get; set; }
     }
 
     public class Distance
     {
-        public string text { get; set; }
+        public string Text { get; set; }
     }
 
     public class Duration
     {
-        public string text { get; set; }
+        public string Text { get; set; }
     }
 }

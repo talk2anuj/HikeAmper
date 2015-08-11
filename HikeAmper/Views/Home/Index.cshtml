@@ -50,7 +50,7 @@
             {
                 <th>
                     Weather<br />
-                    @String.Format("{0}, {1} {2}", @detail.Date.weekday_short, @detail.Date.monthname_short, @detail.Date.Day)
+                    @String.Format("{0}, {1} {2}", @detail.Date.Weekday_short, @detail.Date.Monthname_short, @detail.Date.Day)
                 </th>
             }
             <th>
@@ -88,7 +88,7 @@
                 @foreach (var weather in @item.WeatherDetails)
                 {
                     <td>
-                        <b>@String.Format("{0}", @weather.Date.weekday_short)</b><br/><br/>
+                        <b>@String.Format("{0}", @weather.Date.Weekday_short)</b><br/><br/>
                         @String.Format("Rain  -  {0}%", @weather.Pop)<br/>
                         <table class="table-condensed">
                             <tr>

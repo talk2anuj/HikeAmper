@@ -22,8 +22,8 @@ namespace HikeService.MapsModule.Services.impl
                 string url = GetUrl(source, destination);
                 string json = WebClientUtility.GetJsonString(url);
                 DistanceAndDuration value = JsonConvert.DeserializeObject<DistanceAndDuration>(json);
-                mapDetails.Distance = value.routes[0].legs[0].distance.text;
-                mapDetails.Duration = value.routes[0].legs[0].duration.text;
+                mapDetails.Distance = value.Routes[0].Legs[0].Distance.Text;
+                mapDetails.Duration = value.Routes[0].Legs[0].Duration.Text;
             }
             catch (Exception e)
             {
