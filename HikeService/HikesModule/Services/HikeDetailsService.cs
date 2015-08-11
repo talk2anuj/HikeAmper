@@ -1,5 +1,5 @@
 ﻿using System;
-using HikeService.HikesModule.Models;
+using CommonModels.Hike;
 
 namespace HikeService.HikesModule.Services
 {

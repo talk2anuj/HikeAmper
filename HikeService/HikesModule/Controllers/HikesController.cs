@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using CommonModels.Hike;
 using HikeService.Factories;
 using HikeService.HikesModule.Builders;
-using HikeService.HikesModule.Models;
-using HikeService.StorageModule.Services;
+using HikeService.Storage.Services;
 
 namespace HikeService.HikesModule.Controllers
 {
@@ -16,7 +16,7 @@ namespace HikeService.HikesModule.Controllers
 		    DataStorageService dataStorageService = ServiceFactory.GetStorageService();
 
 		    List<string> urls = dataStorageService.GetUrls(type, user);
-            
+
 		    return urls.Select(url => summaryBuilder.Build(url)).ToList();
 		}
 
@@ -28,7 +28,7 @@ namespace HikeService.HikesModule.Controllers
 		        return dataStorageService.WriteUrl(user, type, data.Value);
 		    } else {
                 return false;
-		    }	    
+		    }
 		}
 
 	    public bool Delete(string type, string user, [FromBody] UserData data)

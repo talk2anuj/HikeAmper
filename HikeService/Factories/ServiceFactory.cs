@@ -1,13 +1,13 @@
 ﻿using System.Configuration;
 using System.Net;
-using HikeService.CacheModule.Services;
-using HikeService.CacheModule.Services.impl;
+using HikeService.CacheManagement.Services;
+using HikeService.CacheManagement.Services.impl;
 using HikeService.HikesModule.Services;
 using HikeService.HikesModule.Services.impl;
 using HikeService.MapsModule.Services;
 using HikeService.MapsModule.Services.impl;
-using HikeService.StorageModule.Services;
-using HikeService.StorageModule.Services.impl;
+using HikeService.Storage.Services;
+using HikeService.Storage.Services.impl;
 using HikeService.WeatherModule;
 using HikeService.WeatherModule.impl;
 using StackExchange.Redis;

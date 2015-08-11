@@ -1,4 +1,4 @@
-﻿using HikeService.HikesModule.Models;
+﻿using CommonModels.Hike;
 using HikeService.Utilities;
 using HtmlAgilityPack;
 

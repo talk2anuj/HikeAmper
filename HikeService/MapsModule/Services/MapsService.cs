@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using HikeService.MapsModule.Models;
+using CommonModels.Map;
 
 namespace HikeService.MapsModule.Services
 {

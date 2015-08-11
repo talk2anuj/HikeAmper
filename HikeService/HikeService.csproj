@@ -107,11 +107,11 @@
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Utilities\CacheUtility.cs" />
-    <Compile Include="CacheModule\Services\CacheService.cs" />
-    <Compile Include="CacheModule\Services\impl\GoogleMapsCacheService.cs" />
-    <Compile Include="CacheModule\Services\impl\WtaTripCacheService.cs" />
-    <Compile Include="CacheModule\Services\impl\WeatherUndergroundCacheService.cs" />
-    <Compile Include="CacheModule\Services\impl\WtaHikeCacheService.cs" />
+    <Compile Include="CacheManagement\Services\CacheService.cs" />
+    <Compile Include="CacheManagement\Services\impl\GoogleMapsCacheService.cs" />
+    <Compile Include="CacheManagement\Services\impl\WtaTripCacheService.cs" />
+    <Compile Include="CacheManagement\Services\impl\WeatherUndergroundCacheService.cs" />
+    <Compile Include="CacheManagement\Services\impl\WtaHikeCacheService.cs" />
     <Compile Include="Factories\BuilderFactory.cs" />
     <Compile Include="Factories\ServiceFactory.cs" />
     <Compile Include="Global.asax.cs">
@@ -119,28 +119,22 @@
     </Compile>
     <Compile Include="HikesModule\Builders\HikeSummaryBuilder.cs" />
     <Compile Include="HikesModule\Controllers\HikesController.cs" />
-    <Compile Include="HikesModule\Models\HikeAndTripDetails.cs" />
-    <Compile Include="HikesModule\Models\HikeSummary.cs" />
     <Compile Include="HikesModule\Services\HikeDetailsService.cs" />
     <Compile Include="HikesModule\Services\impl\WtaHikeDetailsService.cs" />
-    <Compile Include="MapsModule\Models\GeographicalLocation.cs" />
-    <Compile Include="MapsModule\Models\MapDetails.cs" />
-    <Compile Include="MapsModule\Models\PhysicalAddress.cs" />
     <Compile Include="MapsModule\Services\impl\GoogleMapsService.cs" />
     <Compile Include="MapsModule\Services\MapsService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="StorageModule\Constants.cs" />
-    <Compile Include="StorageModule\Models\HikeDataEntity.cs" />
-    <Compile Include="StorageModule\Models\UserDataEntity.cs" />
-    <Compile Include="StorageModule\Services\DataStorageService.cs" />
-    <Compile Include="StorageModule\Services\impl\AzureDataStorageService.cs" />
-    <Compile Include="StorageModule\Services\impl\FileDataStorageService.cs" />
-    <Compile Include="StorageModule\Utilities\ResultUtility.cs" />
-    <Compile Include="StorageModule\Utilities\StorageUtility.cs" />
+    <Compile Include="Storage\Constants.cs" />
+    <Compile Include="Storage\Models\HikeDataEntity.cs" />
+    <Compile Include="Storage\Models\UserDataEntity.cs" />
+    <Compile Include="Storage\Services\DataStorageService.cs" />
+    <Compile Include="Storage\Services\impl\AzureDataStorageService.cs" />
+    <Compile Include="Storage\Services\impl\FileDataStorageService.cs" />
+    <Compile Include="Storage\Utilities\ResultUtility.cs" />
+    <Compile Include="Storage\Utilities\StorageUtility.cs" />
     <Compile Include="Utilities\HikeDocumentUtility.cs" />
     <Compile Include="Utilities\WebClientUtility.cs" />
     <Compile Include="WeatherModule\impl\WeatherUndergroundService.cs" />
-    <Compile Include="WeatherModule\Models\WeatherData.cs" />
     <Compile Include="WeatherModule\WeatherDetailsService.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -155,6 +149,12 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CommonModels\CommonModels.csproj">
+      <Project>{3083d84d-198d-4f7d-983a-73889ee670c0}</Project>
+      <Name>CommonModels</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -1,8 +1,8 @@
-﻿using HikeService.CacheModule.Services;
-using HikeService.HikesModule.Models;
-using HikeService.HikesModule.Services;
-using HikeService.MapsModule.Services;
+﻿using CommonModels.Hike;
+using HikeService.CacheManagement.Services;
 using HikeService.WeatherModule;
+using HikeService.MapsModule.Services;
+using HikeService.HikesModule.Services;
 
 namespace HikeService.HikesModule.Builders
 {

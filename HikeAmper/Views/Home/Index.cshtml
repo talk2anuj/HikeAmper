@@ -24,7 +24,7 @@
     }
 </div>
 
-@model IEnumerable<HikeAmper.Models.HikeSummary>
+@model IEnumerable<CommonModels.Hike.HikeSummary>
 
 @if (Model.Count() > 0)
 {
@@ -50,7 +50,7 @@
             {
                 <th>
                     Weather<br />
-                    @String.Format("{0}, {1} {2}", @detail.date.weekday_short, @detail.date.monthname_short, @detail.date.day)
+                    @String.Format("{0}, {1} {2}", @detail.Date.weekday_short, @detail.Date.monthname_short, @detail.Date.Day)
                 </th>
             }
             <th>
@@ -88,8 +88,8 @@
                 @foreach (var weather in @item.WeatherDetails)
                 {
                     <td>
-                        <b>@String.Format("{0}", @weather.date.weekday_short)</b><br/><br/>
-                        @String.Format("Rain  -  {0}%", @weather.pop)<br/>
+                        <b>@String.Format("{0}", @weather.Date.weekday_short)</b><br/><br/>
+                        @String.Format("Rain  -  {0}%", @weather.Pop)<br/>
                         <table class="table-condensed">
                             <tr>
                                 <th>High</th>
@@ -97,10 +97,10 @@
                             </tr>
                             <tr>
                                 <td>
-                                    @String.Format("{0}°C", @weather.high.celsius)
+                                    @String.Format("{0}°C", @weather.High.Celsius)
                                 </td>
                                 <td>
-                                    @String.Format("{0}°C", @weather.low.celsius)
+                                    @String.Format("{0}°C", @weather.Low.Celsius)
                                 </td>
                             </tr>
                         </table>

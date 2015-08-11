@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Linq;
 using System.Text.RegularExpressions;
-using HikeService.HikesModule.Models;
-using HikeService.MapsModule.Models;
+using CommonModels.Hike;
+using CommonModels.Map;
 using HtmlAgilityPack;
 
 namespace HikeService.Utilities

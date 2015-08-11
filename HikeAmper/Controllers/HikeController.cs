@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Text.RegularExpressions;
 using System.Web.Mvc;
+using CommonModels.Hike;
 using HikeAmper.Models;
 using Newtonsoft.Json;
 

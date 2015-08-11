@@ -1,8 +1,7 @@
 ﻿using System;
-using HikeService.HikesModule.Models;
-using HikeService.MapsModule.Models;
+using CommonModels.Map;
+using CommonModels.Weather;
 using HikeService.Utilities;
-using HikeService.WeatherModule.Models;
 using Newtonsoft.Json;
 
 namespace HikeService.WeatherModule.impl

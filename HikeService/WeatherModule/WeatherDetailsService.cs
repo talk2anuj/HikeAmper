@@ -1,6 +1,5 @@
-﻿using HikeService.HikesModule.Models;
-using HikeService.MapsModule.Models;
-using HikeService.WeatherModule.Models;
+﻿using CommonModels.Map;
+using CommonModels.Weather;
 
 namespace HikeService.WeatherModule
 {
