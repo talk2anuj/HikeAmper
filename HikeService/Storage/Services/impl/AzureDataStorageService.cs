@@ -8,7 +8,7 @@ using Microsoft.WindowsAzure.Storage.Table;
 
 namespace HikeService.Storage.Services.impl
 {
-    public class AzureDataStorageService: DataStorageService
+    public class AzureDataStorageService: IDataStorageService
     {
         private const string HikesTableName = "HikesTable";
         private const string UserDataTableName = "UserDataTable";

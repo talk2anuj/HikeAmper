@@ -1,7 +1,8 @@
-﻿using Microsoft.Owin;
+﻿using HikeAmper;
+using Microsoft.Owin;
 using Owin;
 
-[assembly: OwinStartupAttribute(typeof(HikeAmper.Startup))]
+[assembly: OwinStartup(typeof(Startup))]
 namespace HikeAmper
 {
     public partial class Startup

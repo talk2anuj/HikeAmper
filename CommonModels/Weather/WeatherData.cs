@@ -34,8 +34,8 @@
         public int Day { get; set; }
         public int Month { get; set; }
         public int Year { get; set; }
-        public string Monthname_short { get; set; }
-        public string Weekday_short { get; set; }
+        public string MonthnameShort { get; set; }
+        public string WeekdayShort { get; set; }
     }
 
     public class Temperature

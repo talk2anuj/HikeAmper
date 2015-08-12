@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 
 namespace HikeService.WeatherModule.impl
 {
-    public class WeatherUndergroundService : WeatherDetailsService
+    public class WeatherUndergroundService : IWeatherDetailsService
     {
         private const string MyKey = "e4938cdd8fd24af0";
         public WeatherDetails[] GetWeatherForecastDetails(GeographicalLocation locationDetails)

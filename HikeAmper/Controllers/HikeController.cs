@@ -5,7 +5,6 @@ using System.Net;
 using System.Text.RegularExpressions;
 using System.Web.Mvc;
 using CommonModels.Hike;
-using HikeAmper.Models;
 using Newtonsoft.Json;
 
 namespace HikeAmper.Controllers
@@ -17,7 +16,7 @@ namespace HikeAmper.Controllers
         {
             if (!String.IsNullOrEmpty(User.Identity.Name))
             {
-                var userName = getUserName(User.Identity.Name);
+                var userName = GetUserName(User.Identity.Name);
                 WebRequest request =
                     WebRequest.Create("http://hikeservice.azurewebsites.net/hikes/" + userName);
                 request.Method = "POST";
@@ -40,7 +39,7 @@ namespace HikeAmper.Controllers
         {
             if (!String.IsNullOrEmpty(User.Identity.Name))
             {
-                var userName = getUserName(User.Identity.Name);
+                var userName = GetUserName(User.Identity.Name);
                 WebRequest request =
                     WebRequest.Create("http://hikeservice.azurewebsites.net/hikes/" + userName);
                 request.Method = "DELETE";
@@ -60,7 +59,7 @@ namespace HikeAmper.Controllers
         {
             if (!String.IsNullOrEmpty(User.Identity.Name))
             {
-                var userName = getUserName(User.Identity.Name);
+                var userName = GetUserName(User.Identity.Name);
                 WebRequest request =
                     WebRequest.Create("http://hikeservice.azurewebsites.net/hikes/" + userName);
                 request.Method = "GET";
@@ -76,10 +75,10 @@ namespace HikeAmper.Controllers
 
         public class UserData
         {
-            public string value;
+            public string Value;
         }
 
-        private string getUserName(string name)
+        private string GetUserName(string name)
         {
             var regExp = "[^a-zA-Z0-9]";
             return Regex.Replace(name, regExp, "");

@@ -3,7 +3,7 @@ using CommonModels.Hike;
 
 namespace HikeService.HikesModule.Services
 {
-	public interface HikeDetailsService
+	public interface IHikeDetailsService
 	{
 		HikeDetails GetHikeInformation(String url);
         TripDetails GetTripInformation(String url);

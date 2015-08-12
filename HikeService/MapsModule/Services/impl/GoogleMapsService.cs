@@ -1,16 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using CommonModels.Map;
 using HikeService.Utilities;
 using Newtonsoft.Json;
 
 namespace HikeService.MapsModule.Services.impl
 {
-    public class GoogleMapsService: MapsService
+    public class GoogleMapsService: IMapsService
     {
-        public const string api = " https://maps.googleapis.com/maps/api/directions/json?";
+        public const string Api = " https://maps.googleapis.com/maps/api/directions/json?";
 
         public MapDetails GetMapDetails(GeographicalLocation destination)
         {
@@ -34,7 +31,7 @@ namespace HikeService.MapsModule.Services.impl
 
         private string GetUrl(PhysicalAddress source, GeographicalLocation destination)
         {
-            return api + "origin=" + source.Zip + "&destination=" + destination.Latitude + "," + destination.Longitude;
+            return Api + "origin=" + source.Zip + "&destination=" + destination.Latitude + "," + destination.Longitude;
         }
     }
 }

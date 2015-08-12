@@ -3,7 +3,7 @@ using CommonModels.Weather;
 
 namespace HikeService.WeatherModule
 {
-    public interface WeatherDetailsService
+    public interface IWeatherDetailsService
     {
         WeatherDetails[] GetWeatherForecastDetails(GeographicalLocation locationDetails);
     }

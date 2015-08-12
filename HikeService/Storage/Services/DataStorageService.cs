@@ -2,7 +2,7 @@
 
 namespace HikeService.Storage.Services
 {
-	public interface DataStorageService
+	public interface IDataStorageService
 	{		
 		bool WriteUrl(string user, string type, string url);
         bool DeleteUrl(string user, string type, string url);

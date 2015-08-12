@@ -270,7 +270,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CommonModels\CommonModels.csproj">
-      <Project>{3083d84d-198d-4f7d-983a-73889ee670c0}</Project>
+      <Project>{ba8f583f-83c2-456e-9cad-85e619f685e0}</Project>
       <Name>CommonModels</Name>
     </ProjectReference>
   </ItemGroup>

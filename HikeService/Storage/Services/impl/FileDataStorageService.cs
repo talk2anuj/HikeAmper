@@ -4,7 +4,7 @@ using System.IO;
 
 namespace HikeService.Storage.Services.impl
 {
-	public class FileDataStorageService : DataStorageService
+	public class FileDataStorageService : IDataStorageService
 	{
 		private const string FileExtension = ".txt";
 		public bool WriteUrl(string user, string type, string url)

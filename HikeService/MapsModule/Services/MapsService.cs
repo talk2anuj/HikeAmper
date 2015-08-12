@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using CommonModels.Map;
+﻿using CommonModels.Map;
 
 namespace HikeService.MapsModule.Services
 {
-    public interface MapsService
+    public interface IMapsService
     {
         MapDetails GetMapDetails(GeographicalLocation destination);
     }

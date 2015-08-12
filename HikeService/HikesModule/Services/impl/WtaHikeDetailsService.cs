@@ -4,9 +4,9 @@ using HtmlAgilityPack;
 
 namespace HikeService.HikesModule.Services.impl
 {
-	public class WtaHikeDetailsService : HikeDetailsService
+	public class WtaHikeDetailsService : IHikeDetailsService
 	{
-        private static string TRIP_REPORT_URL_EXTENSION = "/@@related_tripreport_listing";
+        private static string _tripReportUrlExtension = "/@@related_tripreport_listing";
 
 		public HikeDetails GetHikeInformation(string url)
 		{
@@ -19,7 +19,7 @@ namespace HikeService.HikesModule.Services.impl
         public TripDetails GetTripInformation(string url)
         {
             //scrape data from WTA
-            HtmlDocument tripReportDoc = WebClientUtility.GetHtmlDocument(url + TRIP_REPORT_URL_EXTENSION);
+            HtmlDocument tripReportDoc = WebClientUtility.GetHtmlDocument(url + _tripReportUrlExtension);
             var tripDetails = HikeDocumentUtility.GetTripReportDetails(tripReportDoc);
             return tripDetails;
         }

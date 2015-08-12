@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using CommonModels.Map;
+﻿using CommonModels.Map;
 using Microsoft.WindowsAzure.Storage.Table;
 
 namespace HikeService.Storage.Models
