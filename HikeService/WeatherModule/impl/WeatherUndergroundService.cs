@@ -28,7 +28,7 @@ namespace HikeService.WeatherModule.impl
             {
                 //Log error
             }
-            return new WeatherDetails[0];
+            return null;
         }
 
         private string GetUrl(GeographicalLocation locationDetails)

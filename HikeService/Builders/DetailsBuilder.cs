@@ -10,6 +10,6 @@ namespace HikeService.Builders
         {
             Cache = cache;
         }
-        public abstract void Build(string url, HikeSummary hikeSummary);
+        public abstract void Build(string url, HikeSummary hikeSummary, bool partial);
     }
 }

@@ -9,22 +9,17 @@ namespace HikeService.Builders
         public WeatherDetailsBuilder WeatherDetailsBuilder { get; set; }
         public MapDetailsBuilder MapDetailsBuilder { get; set; }
 
-		public HikeSummary Build(string url)
+		public HikeSummary Build(string url, bool partial)
 		{
 			HikeSummary hikeSummary = new HikeSummary();
 		    hikeSummary.HikeAndTripDetails = new HikeAndTripDetails();
-		    var hike = GetHikeName(url);
-		    //HikeCacheService.ClearCache();
-		    //TripCacheService.ClearCache();
-		    //MapCacheService.ClearCache();
-		    //WeatherCacheService.ClearCache();
-		    HikeDetailsBuilder.Build(url, hikeSummary);
-		    TripDetailsBuilder.Build(url, hikeSummary);
+		    HikeDetailsBuilder.Build(url, hikeSummary, partial);
+		    TripDetailsBuilder.Build(url, hikeSummary, partial);
 		    if (hikeSummary.HikeAndTripDetails.HikeDetails != null &&
 		        hikeSummary.HikeAndTripDetails.HikeDetails.Location != null)
 		    {
-		        WeatherDetailsBuilder.Build(url, hikeSummary);
-		        MapDetailsBuilder.Build(url, hikeSummary);
+		        WeatherDetailsBuilder.Build(url, hikeSummary, partial);
+		        MapDetailsBuilder.Build(url, hikeSummary, partial);
 		    }
 		    return hikeSummary;
 		}

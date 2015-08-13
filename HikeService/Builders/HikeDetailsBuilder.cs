@@ -13,7 +13,7 @@ namespace HikeService.Builders
         {
             DetailsService = detailsService;
         }
-        public override void Build(string url, HikeSummary hikeSummary)
+        public override void Build(string url, HikeSummary hikeSummary, bool partial)
         {
             string cacheKey = CacheUtility.GetCacheKey(url);
             if (!Cache.PopulateDetails(cacheKey, hikeSummary))

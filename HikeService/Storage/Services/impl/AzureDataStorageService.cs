@@ -77,7 +77,8 @@ namespace HikeService.Storage.Services.impl
             {
                 var query = new TableQuery<HikeDataEntity>().Where(TableQuery.GenerateFilterCondition("PartitionKey", QueryComparisons.Equal, user));
                 var entities = HikesTable.ExecuteQuery(query).ToList();
-                urls.AddRange(entities.Select(entity => entity.Url));
+
+                urls.AddRange(entities.OrderBy(entity => entity.Timestamp).Select(entity => entity.Url));
             }
 
             return urls;

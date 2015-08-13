@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Web.Http;
 using CommonModels.Hike;
 using HikeService.Builders;
@@ -10,15 +11,24 @@ namespace HikeService.HikesModule.Controllers
 {
 	public class HikesController : ApiController
 	{
-		public List<HikeSummary> Get (string type, string user)
+        public List<HikeSummary> Get(string type, string user, string continuationToken)
 		{
             //Extend if required later: Get the HikeSummaryBuilder based on the url
             HikeSummaryBuilder summaryBuilder = BuilderFactory.GetHikeSummaryBuilder();
 		    IDataStorageService dataStorageService = ServiceFactory.GetStorageService();
 
 		    List<string> urls = dataStorageService.GetUrls(type, user);
+            //Minimal build all urls
 
-		    return urls.Select(url => summaryBuilder.Build(url)).ToList();
+            //Based on continuation token, full build just few and return those only
+            int index = int.Parse(continuationToken) * 8;
+            if (index > 0)
+            {
+                int count = index + 8 <= urls.Count ? 8 : urls.Count - index;
+                urls = urls.GetRange(index, count);
+                return urls.Select(url => summaryBuilder.Build(url, false)).ToList();
+            }
+            return urls.Select(url => summaryBuilder.Build(url, true)).ToList();
 		}
 
 		public bool Post (string type, string user, [FromBody] UserData data)

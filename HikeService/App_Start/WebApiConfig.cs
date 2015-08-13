@@ -12,9 +12,9 @@ namespace HikeService
 
             config.Routes.MapHttpRoute(
                 name: "HikesApi",
-                routeTemplate: "hikes/{user}",
-                defaults: new { controller = "hikes", type = Constants.HikesType }
-            );					
+                routeTemplate: "hikes/{user}/{continuationToken}",
+                defaults: new { controller = "hikes", type = Constants.HikesType, continuationToken = "0" }
+            );
 		}
     }
 }

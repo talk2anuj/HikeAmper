@@ -45,12 +45,11 @@
             <th>
                 Elevation<br/>
                 (In feet)
-            </th>            
-            @foreach (var detail in Model.First().WeatherDetails)
+            </th>
+            @for (int i=0; i<4; i++)
             {
                 <th>
-                    Weather<br />
-                    @String.Format("{0}, {1} {2}", @detail.Date.WeekdayShort, @detail.Date.MonthnameShort, @detail.Date.Day)
+                    Weather<br />                    
                 </th>
             }
             <th>
@@ -85,26 +84,36 @@
                     Highest Point:
                     @item.HikeAndTripDetails.HikeDetails.ElevationDetails.HighestPoint<br/>
                 </td>
-                @foreach (var weather in @item.WeatherDetails)
+                @if (@item.WeatherDetails == null)
                 {
-                    <td>
-                        <b>@String.Format("{0}", @weather.Date.WeekdayShort)</b><br/><br/>
-                        @String.Format("Rain  -  {0}%", @weather.Pop)<br/>
-                        <table class="table-condensed">
-                            <tr>
-                                <th>High</th>
-                                <th>Low</th>
-                            </tr>
-                            <tr>
-                                <td>
-                                    @String.Format("{0}°C", @weather.High.Celsius)
-                                </td>
-                                <td>
-                                    @String.Format("{0}°C", @weather.Low.Celsius)
-                                </td>
-                            </tr>
-                        </table>
-                    </td>
+                    for (int i = 0; i < 4; i++)
+                    {
+                        <td>NA</td>
+                    }
+                }
+                else
+                {
+                    foreach (var weather in @item.WeatherDetails)
+                     {
+                         <td>
+                             <b>@String.Format("{0}, {1} {2}", @weather.Date.Weekday_Short, @weather.Date.Monthname_Short, @weather.Date.Day)</b><br /><br />
+                             @String.Format("Rain  -  {0}%", @weather.Pop)<br/>
+                             <table class="table-condensed">
+                                 <tr>
+                                     <th>High</th>
+                                     <th>Low</th>
+                                 </tr>
+                                 <tr>
+                                     <td>
+                                         @String.Format("{0}°C", @weather.High.Celsius)
+                                     </td>
+                                     <td>
+                                         @String.Format("{0}°C", @weather.Low.Celsius)
+                                     </td>
+                                 </tr>
+                             </table>
+                         </td>
+                     }
                 }
                 <td>
                     <a href=@item.HikeAndTripDetails.TripDetails.Url target="_blank">@item.HikeAndTripDetails.TripDetails.Date</a><br/>

@@ -1,5 +1,5 @@
-﻿using CommonModels.Hike;
-using HikeService.CacheManagement;
+﻿using System.Threading;
+using CommonModels.Hike;
 using HikeService.CacheManagement.Services;
 using HikeService.WeatherModule;
 using CacheUtility = HikeService.Utilities.CacheUtility;
@@ -13,15 +13,26 @@ namespace HikeService.Builders
         {
             DetailsService = detailsService;
         }
-        public override void Build(string url, HikeSummary hikeSummary)
+        public override void Build(string url, HikeSummary hikeSummary, bool partial)
         {
+            //Cache.ClearCache();
             string cacheKey = CacheUtility.GetCacheKey(url);
             if (!Cache.PopulateDetails(cacheKey, hikeSummary))
+		    {
+		        if (partial)
 		        {
+		            hikeSummary.WeatherDetails = null;
+		        }
+		        else {
+		            Thread.Sleep(60000);
 		            hikeSummary.WeatherDetails =
 		                DetailsService.GetWeatherForecastDetails(hikeSummary.HikeAndTripDetails.HikeDetails.Location);
-		            Cache.AddDetails(cacheKey, hikeSummary);
+		            if (hikeSummary.WeatherDetails != null)
+		            {
+		                Cache.AddDetails(cacheKey, hikeSummary);
+		            }
 		        }
+		    }
         }
     }
 }
