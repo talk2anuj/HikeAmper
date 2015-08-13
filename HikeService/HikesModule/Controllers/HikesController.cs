@@ -26,6 +26,7 @@ namespace HikeService.HikesModule.Controllers
             {
                 int count = index + 8 <= urls.Count ? 8 : urls.Count - index;
                 urls = urls.GetRange(index, count);
+                Thread.Sleep(60000);
                 return urls.Select(url => summaryBuilder.Build(url, false)).ToList();
             }
             return urls.Select(url => summaryBuilder.Build(url, true)).ToList();

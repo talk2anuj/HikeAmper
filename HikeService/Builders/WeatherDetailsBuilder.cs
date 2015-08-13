@@ -24,7 +24,6 @@ namespace HikeService.Builders
 		            hikeSummary.WeatherDetails = null;
 		        }
 		        else {
-		            Thread.Sleep(60000);
 		            hikeSummary.WeatherDetails =
 		                DetailsService.GetWeatherForecastDetails(hikeSummary.HikeAndTripDetails.HikeDetails.Location);
 		            if (hikeSummary.WeatherDetails != null)
