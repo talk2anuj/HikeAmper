@@ -1,4 +1,5 @@
-﻿@{
+﻿@Scripts.Render("~/bundles/myBundle")
+@{
     ViewBag.Title = "Home Page";
 }
 
@@ -18,16 +19,15 @@
             <p>
                 Find a hike from WTA and add it to the list of your hikes.
             </p>
-            <input type="text" name="hikeUrl" />
-            <input type="submit" class="btn btn-primary" name="Go" value="Go" />
+            <input type="text" name="hikeUrl"/>
+            <input type="submit" class="btn btn-primary" name="Go" value="Go"/>
         </div>
     }
 </div>
 
-@model IEnumerable<CommonModels.Hike.HikeSummary>
+<input type="hidden" id="userName" value="@HttpContext.Current.User.Identity.Name">
 
-@if (Model.Count() > 0)
-{
+
     <h2>My Hike Details</h2>
     
     <table class="table">
@@ -64,89 +64,56 @@
             </th>
         </tr>
 
-        @foreach (var item in Model)
-        {
+        <tbody data-bind="foreach: hikeSummary">
             <tr>
                 <td>
-                    <a href=@item.HikeAndTripDetails.HikeDetails.Url target="_blank">@item.HikeAndTripDetails.HikeDetails.Name</a>
+                    HikeAndTripDetails.HikeDetails.Name
                 </td>
                 <td>
-                    @item.HikeAndTripDetails.HikeDetails.LocationName
+                    HikeAndTripDetails.HikeDetails.LocationName
                 </td>
                 <td>
-                    <b>@item.HikeAndTripDetails.HikeDetails.RoundTripLength</b>
+                    <b>HikeAndTripDetails.HikeDetails.RoundTripLength</b>
                 </td>
                 <td>
                     Gain:
                     <b>
-                        @item.HikeAndTripDetails.HikeDetails.ElevationDetails.Gain
-                    </b> <br/><br/>
+                        HikeAndTripDetails.HikeDetails.ElevationDetails.Gain
+                    </b> <br /><br />
                     Highest Point:
-                    @item.HikeAndTripDetails.HikeDetails.ElevationDetails.HighestPoint<br/>
+                    HikeAndTripDetails.HikeDetails.ElevationDetails.HighestPoint<br />
                 </td>
-                @if (@item.WeatherDetails == null)
-                {
-                    for (int i = 0; i < 4; i++)
-                    {
-                        <td>NA</td>
-                    }
-                }
-                else
-                {
-                    foreach (var weather in @item.WeatherDetails)
-                     {
-                         <td>
-                             <b>@String.Format("{0}, {1} {2}", @weather.Date.Weekday_Short, @weather.Date.Monthname_Short, @weather.Date.Day)</b><br /><br />
-                             @String.Format("Rain  -  {0}%", @weather.Pop)<br/>
-                             <table class="table-condensed">
-                                 <tr>
-                                     <th>High</th>
-                                     <th>Low</th>
-                                 </tr>
-                                 <tr>
-                                     <td>
-                                         @String.Format("{0}°C", @weather.High.Celsius)
-                                     </td>
-                                     <td>
-                                         @String.Format("{0}°C", @weather.Low.Celsius)
-                                     </td>
-                                 </tr>
-                             </table>
-                         </td>
-                     }
-                }
+               
                 <td>
-                    <a href=@item.HikeAndTripDetails.TripDetails.Url target="_blank">@item.HikeAndTripDetails.TripDetails.Date</a><br/>
-                    @item.HikeAndTripDetails.TripDetails.TypeOfHike <br/>
-                    @item.HikeAndTripDetails.TripDetails.TrailCondition <br/>
-                    @item.HikeAndTripDetails.TripDetails.SnowCondition <br/>
-                    @item.HikeAndTripDetails.TripDetails.RoadCondition <br/>
-                    @item.HikeAndTripDetails.TripDetails.BugsCondition <br/><br/>
-                    <a href=@item.HikeAndTripDetails.HikeDetails.TripReportsUrl target="_blank">Other Reports</a><br/>
+                   
+                    HikeAndTripDetails.TripDetails.TypeOfHike <br />
+                    HikeAndTripDetails.TripDetails.TrailCondition <br />
+                    HikeAndTripDetails.TripDetails.SnowCondition <br />
+                    HikeAndTripDetails.TripDetails.RoadCondition <br />
+                    HikeAndTripDetails.TripDetails.BugsCondition <br /><br />
+                    
                 </td>
                 <td>
-                    @item.MapDetails.Distance<br/><br/>
-                    <b>@item.MapDetails.Duration</b><br/>
+                    MapDetails.Distance<br /><br />
+                    <b>MapDetails.Duration</b><br />
                 </td>
                 <td>
-                    @item.HikeAndTripDetails.HikeDetails.PassRequired
+                    HikeAndTripDetails.HikeDetails.PassRequired
                 </td>
                 <td>
                     @using (Html.BeginForm("Delete", "Hike"))
                     {
-                        <input type="hidden" name="hikeUrl" value="@item.HikeAndTripDetails.HikeDetails.Url"/>
-                        <input type="image" src="~/Images/trash.png" name="Delete" value="Delete"/>
+                        <input type="hidden" name="hikeUrl" value="HikeAndTripDetails.HikeDetails.Url" />
+                        <input type="image" src="~/Images/trash.png" name="Delete" value="Delete" />
                     }
                 </td>
             </tr>
-        }
+            </tbody>
 
-    </table>
-}
-else
-{
+</table>
+
+
     <h2>No hikes found in your account.</h2>
     <p>
         Please add hikes before trying to view details about hikes.
     </p>
-}

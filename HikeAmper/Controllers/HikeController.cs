@@ -29,10 +29,7 @@ namespace HikeAmper.Controllers
                 request.GetResponse();
                 return RedirectToAction("MyHikeDetails", "Hike");
             }
-            else
-            {
-                return View("Login");
-            }
+            return View("Login");
         }
 
         public ActionResult Delete(FormCollection form)
@@ -59,16 +56,8 @@ namespace HikeAmper.Controllers
         {
             if (!String.IsNullOrEmpty(User.Identity.Name))
             {
-                var userName = GetUserName(User.Identity.Name);
-                WebRequest request =
-                    WebRequest.Create("http://hikeservice.azurewebsites.net/hikes/" + userName);
-                request.Method = "GET";
-                request.ContentType = "application/json";
-                var response = request.GetResponse();
-                var reader = new StreamReader(response.GetResponseStream());
-                var responseData = reader.ReadToEnd();
-                HikeSummary[] myHikesData = JsonConvert.DeserializeObject<HikeSummary[]>(responseData);
-                return View("../Home/Index", myHikesData.ToList());
+
+                return View("../Home/Index");
             }
             return View("Login");
         }

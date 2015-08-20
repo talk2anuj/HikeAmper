@@ -25,6 +25,13 @@ namespace HikeAmper
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+
+            bundles.Add(new ScriptBundle("~/bundles/myBundle").Include(
+                                        "~/Scripts/jquery-{version}.js",
+                                        "~/Scripts/knockout-3.3.0.js",
+                                        "~/scripts/knockout.mapping-latest.js",
+                                        "~/ViewModels/HikeSummaryViewModel.js"
+                                        ));
         }
     }
 }
