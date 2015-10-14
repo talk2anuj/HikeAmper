@@ -1,13 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HikeAmperWebsite", "HikeAmper\HikeAmperWebsite.csproj", "{9378FE14-4308-4BAF-9AC4-71E9A8E8D2C5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HikeService", "HikeService\HikeService.csproj", "{9C1F20CA-354D-4FF7-8BAC-02098E68B4E6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommonModels", "CommonModels\CommonModels.csproj", "{BA8F583F-83C2-456E-9CAD-85E619F685E0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommonModels", "CommonModels\CommonModels.csproj", "{AEC7FA8A-3373-4DAD-9879-02D0F6092F40}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +23,10 @@ Global
 		{9C1F20CA-354D-4FF7-8BAC-02098E68B4E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9C1F20CA-354D-4FF7-8BAC-02098E68B4E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9C1F20CA-354D-4FF7-8BAC-02098E68B4E6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BA8F583F-83C2-456E-9CAD-85E619F685E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BA8F583F-83C2-456E-9CAD-85E619F685E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BA8F583F-83C2-456E-9CAD-85E619F685E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BA8F583F-83C2-456E-9CAD-85E619F685E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AEC7FA8A-3373-4DAD-9879-02D0F6092F40}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AEC7FA8A-3373-4DAD-9879-02D0F6092F40}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AEC7FA8A-3373-4DAD-9879-02D0F6092F40}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AEC7FA8A-3373-4DAD-9879-02D0F6092F40}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
