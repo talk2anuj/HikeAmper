@@ -1,5 +1,6 @@
 ﻿using CommonModels.Hike;
 using HikeService.CacheManagement.Services;
+using HikeService.DetailServices;
 
 namespace HikeService.Builders
 {

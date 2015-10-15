@@ -1,4 +1,7 @@
-﻿using HikeService.CacheManagement;
+﻿using CommonModels.Hike;
+using CommonModels.Map;
+using CommonModels.Weather;
+using HikeService.CacheManagement;
 using HikeService.CacheManagement.Services;
 using HikeService.CacheManagement.Services.impl;
 
@@ -6,19 +9,19 @@ namespace HikeService.Factories
 {
     public class CacheFactory
     {
-        private static WtaHikeRedisCacheService _wtaHikeRedisCacheService;
-        private static GoogleMapsRedisCacheService _googleMapsRedisCacheService;
-        private static WeatherUndergroundRedisCacheService _weatherUndergroundRedisCacheService;
-        private static WtaTripRedisCacheService _tripRedisCacheService;
-        private static CacheStubService _cacheStubService;
+        private static RedisCacheService<HikeDetails> _wtaHikeRedisRedisCacheService;
+        private static RedisCacheService<MapDetails> _googleMapsRedisRedisCacheService;
+        private static RedisCacheService<WeatherDetails[]> _weatherUndergroundRedisRedisCacheService;
+        private static RedisCacheService<TripDetails> _tripRedisRedisCacheService;
+        private static StubCacheService _stubCacheService;
 
         static CacheFactory()
         {
-            _weatherUndergroundRedisCacheService = new WeatherUndergroundRedisCacheService("weathercache");
-            _wtaHikeRedisCacheService = new WtaHikeRedisCacheService("hikecache");
-            _googleMapsRedisCacheService = new GoogleMapsRedisCacheService("mapcache");
-            _tripRedisCacheService = new WtaTripRedisCacheService("tripcache");
-            _cacheStubService = new CacheStubService();
+            _weatherUndergroundRedisRedisCacheService = new RedisCacheService<WeatherDetails[]>("weathercache");
+            _wtaHikeRedisRedisCacheService = new RedisCacheService<HikeDetails>("hikecache");
+            _googleMapsRedisRedisCacheService = new RedisCacheService<MapDetails>("mapcache");
+            _tripRedisRedisCacheService = new RedisCacheService<TripDetails>("tripcache");
+            _stubCacheService = new StubCacheService();
         }
 
         public static ICacheService GetHikeCacheService(CacheType type)
@@ -26,11 +29,11 @@ namespace HikeService.Factories
             switch (type)
             {
                 case CacheType.Redis:
-                    return _wtaHikeRedisCacheService;
+                    return _wtaHikeRedisRedisCacheService;
                 case CacheType.AzureStorage:
-                    return _cacheStubService;
+                    return _stubCacheService;
                 default:
-                    return _cacheStubService;
+                    return _stubCacheService;
             }
         }
 
@@ -39,11 +42,11 @@ namespace HikeService.Factories
             switch (type)
             {
                 case CacheType.Redis:
-                    return _weatherUndergroundRedisCacheService;
+                    return _weatherUndergroundRedisRedisCacheService;
                 case CacheType.AzureStorage:
-                    return _cacheStubService;
+                    return _stubCacheService;
                 default:
-                    return _cacheStubService;
+                    return _stubCacheService;
             }
         }
 
@@ -52,11 +55,11 @@ namespace HikeService.Factories
             switch (type)
             {
                 case CacheType.Redis:
-                    return _googleMapsRedisCacheService;
+                    return _googleMapsRedisRedisCacheService;
                 case CacheType.AzureStorage:
-                    return _cacheStubService;
+                    return _stubCacheService;
                 default:
-                    return _cacheStubService;
+                    return _stubCacheService;
             }
         }
 
@@ -65,11 +68,11 @@ namespace HikeService.Factories
             switch (type)
             {
                 case CacheType.Redis:
-                    return _tripRedisCacheService;
+                    return _tripRedisRedisCacheService;
                 case CacheType.AzureStorage:
-                    return _cacheStubService;
+                    return _stubCacheService;
                 default:
-                    return _cacheStubService;
+                    return _stubCacheService;
             }
         }
     }

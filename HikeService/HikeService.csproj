@@ -105,30 +105,25 @@
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Builders\DetailBuilder.cs" />
-    <Compile Include="Builders\DetailService.cs" />
     <Compile Include="CacheManagement\CacheType.cs" />
+    <Compile Include="CacheManagement\Services\impl\AzureStorageCacheService.cs" />
+    <Compile Include="CacheManagement\Services\impl\RedisCacheService.cs" />
     <Compile Include="CacheManagement\Services\ICacheService.cs" />
-    <Compile Include="CacheManagement\Services\impl\CacheStubService.cs" />
+    <Compile Include="CacheManagement\Services\impl\StubCacheService.cs" />
     <Compile Include="Factories\CacheFactory.cs" />
     <Compile Include="Factories\StorageFactory.cs" />
-    <Compile Include="HikesModule\Services\impl\WtaTripDetailService.cs" />
+    <Compile Include="DetailServices\impl\WtaTripDetailService.cs" />
+    <Compile Include="DetailServices\IDetailService.cs" />
     <Compile Include="Utilities\CacheUtility.cs" />
-    <Compile Include="CacheManagement\Services\RedisCacheService.cs" />
-    <Compile Include="CacheManagement\Services\impl\GoogleMapsRedisCacheService.cs" />
-    <Compile Include="CacheManagement\Services\impl\WtaTripRedisCacheService.cs" />
-    <Compile Include="CacheManagement\Services\impl\WeatherUndergroundRedisCacheService.cs" />
-    <Compile Include="CacheManagement\Services\impl\WtaHikeRedisCacheService.cs" />
     <Compile Include="Factories\BuilderFactory.cs" />
     <Compile Include="Factories\ServiceFactory.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Builders\SummaryBuilder.cs" />
-    <Compile Include="HikesModule\Controllers\HikesController.cs" />
-    <Compile Include="HikesModule\Services\HikeDetailsService.cs" />
-    <Compile Include="HikesModule\Services\impl\WtaHikeDetailService.cs" />
-    <Compile Include="MapsModule\Services\impl\GoogleMapsService.cs" />
-    <Compile Include="MapsModule\Services\MapsService.cs" />
+    <Compile Include="Controllers\HikesController.cs" />
+    <Compile Include="DetailServices\impl\WtaHikeDetailService.cs" />
+    <Compile Include="DetailServices\impl\GoogleMapsService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Storage\Constants.cs" />
     <Compile Include="Storage\Models\HikeDataEntity.cs" />
@@ -140,8 +135,7 @@
     <Compile Include="Storage\Utilities\StorageUtility.cs" />
     <Compile Include="Utilities\HikeDocumentUtility.cs" />
     <Compile Include="Utilities\WebClientUtility.cs" />
-    <Compile Include="WeatherModule\impl\WeatherUndergroundService.cs" />
-    <Compile Include="WeatherModule\WeatherDetailsService.cs" />
+    <Compile Include="DetailServices\impl\WeatherUndergroundService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

@@ -2,11 +2,10 @@
 using CommonModels.Map;
 using CommonModels.Weather;
 using HikeService.Builders;
-using HikeService.HikesModule.Services.impl;
-using HikeService.MapsModule.Services.impl;
+using HikeService.DetailServices;
+using HikeService.DetailServices.impl;
 using HikeService.Storage.Services;
 using HikeService.Storage.Services.impl;
-using HikeService.WeatherModule.impl;
 
 namespace HikeService.Factories
 {

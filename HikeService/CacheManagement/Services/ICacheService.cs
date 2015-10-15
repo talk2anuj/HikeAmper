@@ -4,9 +4,9 @@ namespace HikeService.CacheManagement.Services
 {
     public interface ICacheService
     {
-        bool PopulateDetails(string hike, HikeSummary hikeSummary);
+        bool PopulateDetails(string hike, HikeSummary summary);
 
-        void AddDetails(string hike, HikeSummary hikeSummary);
+        void AddDetails(string hike, HikeSummary summary);
 
         void ClearCache();
     }
