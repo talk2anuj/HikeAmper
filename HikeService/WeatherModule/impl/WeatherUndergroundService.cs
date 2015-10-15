@@ -1,22 +1,25 @@
 ﻿using System;
+using CommonModels.Hike;
 using CommonModels.Map;
 using CommonModels.Weather;
+using HikeService.Builders;
 using HikeService.Utilities;
 using Newtonsoft.Json;
 
 namespace HikeService.WeatherModule.impl
 {
-    public class WeatherUndergroundService : IWeatherDetailsService
+    public class WeatherUndergroundService : IDetailService<WeatherDetails[]>
     {
         private const string MyKey = "e4938cdd8fd24af0";
-        public WeatherDetails[] GetWeatherForecastDetails(GeographicalLocation locationDetails)
-        {
-            var url = GetUrl(locationDetails);
-            //scrape data from WeatherData Underground Service
-            string json = WebClientUtility.GetJsonString(url);
-            return Get4DaysForecast(json);
-        }
 
+        public void PopulateDetails(string url, HikeSummary summary)
+        {
+            GeographicalLocation locationDetails = summary.HikeAndTripDetails.HikeDetails.Location;
+            var locationUrl = GetUrl(locationDetails);
+            //scrape data from WeatherData Underground Service
+            string json = WebClientUtility.GetJsonString(locationUrl);
+            summary.WeatherDetails = Get4DaysForecast(json);
+        }
         private WeatherDetails[] Get4DaysForecast(string json)
         {
             try

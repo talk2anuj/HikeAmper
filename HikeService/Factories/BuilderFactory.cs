@@ -1,25 +1,27 @@
-﻿using HikeService.Builders;
+﻿using CommonModels.Hike;
+using CommonModels.Map;
+using CommonModels.Weather;
+using HikeService.Builders;
+using HikeService.CacheManagement;
 
 namespace HikeService.Factories
 {
 	static class BuilderFactory
 	{
-	    private static readonly HikeSummaryBuilder HikeSummaryBuilder;
+	    private static readonly SummaryBuilder SummaryBuilder;
 
 	    static BuilderFactory()
 	    {
-	        HikeSummaryBuilder = new HikeSummaryBuilder();
+	        SummaryBuilder = new SummaryBuilder();
 	    }
-        public static HikeSummaryBuilder GetHikeSummaryBuilder()
+        public static SummaryBuilder GetHikeSummaryBuilder()
         {
             //Extend later if required - Set the builders based on url as input and return appropriate HikeSummaryBuilder
-            HikeSummaryBuilder.HikeDetailsBuilder = new HikeDetailsBuilder(ServiceFactory.GetHikeDetailsService(), CacheFactory.GetHikeCacheService());
-            HikeSummaryBuilder.WeatherDetailsBuilder = new WeatherDetailsBuilder(ServiceFactory.GetWeatherDetailsService(), CacheFactory.GetWeatherCacheService());
-            HikeSummaryBuilder.TripDetailsBuilder = new TripDetailsBuilder(ServiceFactory.GetHikeDetailsService(),
-                CacheFactory.GetTripCacheService());
-            HikeSummaryBuilder.MapDetailsBuilder = new MapDetailsBuilder(ServiceFactory.GetMapsService(),
-                CacheFactory.GetMapCacheService());
-            return HikeSummaryBuilder;
+            SummaryBuilder.HikeDetailBuilder = new DetailBuilder<HikeDetails>(ServiceFactory.GetHikeDetailService(), CacheFactory.GetHikeCacheService(CacheType.Stub));
+            SummaryBuilder.TripDetailBuilder = new DetailBuilder<TripDetails>(ServiceFactory.GetTripDetailService(), CacheFactory.GetTripCacheService(CacheType.Stub));
+            SummaryBuilder.WeatherDetailBuilder = new DetailBuilder<WeatherDetails[]>(ServiceFactory.GetWeatherDetailService(), CacheFactory.GetWeatherCacheService(CacheType.Stub));
+            SummaryBuilder.MapDetailBuilder = new DetailBuilder<MapDetails>(ServiceFactory.GetMapService(), CacheFactory.GetMapCacheService(CacheType.Stub));
+            return SummaryBuilder;
         }
 	}
 }

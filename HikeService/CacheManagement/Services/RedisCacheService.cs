@@ -5,12 +5,12 @@ using StackExchange.Redis;
 
 namespace HikeService.CacheManagement.Services
 {
-    public abstract class CacheService
+    public abstract class RedisCacheService : ICacheService
     {
         public string CacheName;
         public IDatabase Cache;
 
-        public CacheService(string cacheName)
+        public RedisCacheService(string cacheName)
         {
             CacheName = cacheName;
             ConnectionMultiplexer connection = ConnectionMultiplexer.Connect(ConfigurationManager.ConnectionStrings[cacheName].ConnectionString);

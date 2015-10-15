@@ -104,27 +104,28 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Builders\MapDetailsBuilder.cs" />
-    <Compile Include="Builders\WeatherDetailsBuilder.cs" />
-    <Compile Include="Builders\DetailsBuilder.cs" />
-    <Compile Include="Builders\HikeDetailsBuilder.cs" />
-    <Compile Include="Builders\TripDetailsBuilder.cs" />
+    <Compile Include="Builders\DetailBuilder.cs" />
+    <Compile Include="Builders\DetailService.cs" />
+    <Compile Include="CacheManagement\CacheType.cs" />
+    <Compile Include="CacheManagement\Services\ICacheService.cs" />
+    <Compile Include="CacheManagement\Services\impl\CacheStubService.cs" />
     <Compile Include="Factories\CacheFactory.cs" />
+    <Compile Include="HikesModule\Services\impl\WtaTripDetailService.cs" />
     <Compile Include="Utilities\CacheUtility.cs" />
-    <Compile Include="CacheManagement\Services\CacheService.cs" />
-    <Compile Include="CacheManagement\Services\impl\GoogleMapsCacheService.cs" />
-    <Compile Include="CacheManagement\Services\impl\WtaTripCacheService.cs" />
-    <Compile Include="CacheManagement\Services\impl\WeatherUndergroundCacheService.cs" />
-    <Compile Include="CacheManagement\Services\impl\WtaHikeCacheService.cs" />
+    <Compile Include="CacheManagement\Services\RedisCacheService.cs" />
+    <Compile Include="CacheManagement\Services\impl\GoogleMapsRedisCacheService.cs" />
+    <Compile Include="CacheManagement\Services\impl\WtaTripRedisCacheService.cs" />
+    <Compile Include="CacheManagement\Services\impl\WeatherUndergroundRedisCacheService.cs" />
+    <Compile Include="CacheManagement\Services\impl\WtaHikeRedisCacheService.cs" />
     <Compile Include="Factories\BuilderFactory.cs" />
     <Compile Include="Factories\ServiceFactory.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Builders\HikeSummaryBuilder.cs" />
+    <Compile Include="Builders\SummaryBuilder.cs" />
     <Compile Include="HikesModule\Controllers\HikesController.cs" />
     <Compile Include="HikesModule\Services\HikeDetailsService.cs" />
-    <Compile Include="HikesModule\Services\impl\WtaHikeDetailsService.cs" />
+    <Compile Include="HikesModule\Services\impl\WtaHikeDetailService.cs" />
     <Compile Include="MapsModule\Services\impl\GoogleMapsService.cs" />
     <Compile Include="MapsModule\Services\MapsService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

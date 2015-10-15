@@ -1,41 +1,76 @@
-﻿using HikeService.CacheManagement.Services;
+﻿using HikeService.CacheManagement;
+using HikeService.CacheManagement.Services;
 using HikeService.CacheManagement.Services.impl;
 
 namespace HikeService.Factories
 {
     public class CacheFactory
     {
-        private static WtaHikeCacheService _wtaHikeCacheService;
-        private static GoogleMapsCacheService _googleMapsCacheService;
-        private static WeatherUndergroundCacheService _weatherUndergroundCacheService;
-        private static WtaTripCacheService _tripCacheService;
+        private static WtaHikeRedisCacheService _wtaHikeRedisCacheService;
+        private static GoogleMapsRedisCacheService _googleMapsRedisCacheService;
+        private static WeatherUndergroundRedisCacheService _weatherUndergroundRedisCacheService;
+        private static WtaTripRedisCacheService _tripRedisCacheService;
+        private static CacheStubService _cacheStubService;
 
         static CacheFactory()
         {
-            _weatherUndergroundCacheService = new WeatherUndergroundCacheService("weathercache");
-            _wtaHikeCacheService = new WtaHikeCacheService("hikecache");
-            _googleMapsCacheService = new GoogleMapsCacheService("mapcache");
-            _tripCacheService = new WtaTripCacheService("tripcache");
+            _weatherUndergroundRedisCacheService = new WeatherUndergroundRedisCacheService("weathercache");
+            _wtaHikeRedisCacheService = new WtaHikeRedisCacheService("hikecache");
+            _googleMapsRedisCacheService = new GoogleMapsRedisCacheService("mapcache");
+            _tripRedisCacheService = new WtaTripRedisCacheService("tripcache");
+            _cacheStubService = new CacheStubService();
         }
 
-        public static CacheService GetHikeCacheService()
+        public static ICacheService GetHikeCacheService(CacheType type)
         {
-            return _wtaHikeCacheService;
+            switch (type)
+            {
+                case CacheType.Redis:
+                    return _wtaHikeRedisCacheService;
+                case CacheType.AzureStorage:
+                    return _cacheStubService;
+                default:
+                    return _cacheStubService;
+            }
         }
 
-        public static CacheService GetWeatherCacheService()
+        public static ICacheService GetWeatherCacheService(CacheType type)
         {
-            return _weatherUndergroundCacheService;
+            switch (type)
+            {
+                case CacheType.Redis:
+                    return _weatherUndergroundRedisCacheService;
+                case CacheType.AzureStorage:
+                    return _cacheStubService;
+                default:
+                    return _cacheStubService;
+            }
         }
 
-        public static CacheService GetMapCacheService()
+        public static ICacheService GetMapCacheService(CacheType type)
         {
-            return _googleMapsCacheService;
+            switch (type)
+            {
+                case CacheType.Redis:
+                    return _googleMapsRedisCacheService;
+                case CacheType.AzureStorage:
+                    return _cacheStubService;
+                default:
+                    return _cacheStubService;
+            }
         }
 
-        public static CacheService GetTripCacheService()
+        public static ICacheService GetTripCacheService(CacheType type)
         {
-            return _tripCacheService;
+            switch (type)
+            {
+                case CacheType.Redis:
+                    return _tripRedisCacheService;
+                case CacheType.AzureStorage:
+                    return _cacheStubService;
+                default:
+                    return _cacheStubService;
+            }
         }
     }
 }

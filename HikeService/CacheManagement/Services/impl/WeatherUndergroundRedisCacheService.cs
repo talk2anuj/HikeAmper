@@ -7,10 +7,11 @@ using StackExchange.Redis;
 
 namespace HikeService.CacheManagement.Services.impl
 {
-    public class WeatherUndergroundCacheService: CacheService
+    public class WeatherUndergroundRedisCacheService: RedisCacheService
     {
-        public override bool PopulateDetails(string hike, HikeSummary hikeSummary)
+        public override bool PopulateDetails(string url, HikeSummary hikeSummary)
         {
+            string hike = CacheUtility.GetCacheKey(url);
             var weatherDetails = Cache.StringGet(hike);
             if (weatherDetails != RedisValue.Null)
             {
@@ -20,12 +21,13 @@ namespace HikeService.CacheManagement.Services.impl
             return false;
         }
 
-        public override void AddDetails(string hike, HikeSummary hikeSummary)
+        public override void AddDetails(string url, HikeSummary hikeSummary)
         {
+            string hike = CacheUtility.GetCacheKey(url);
             Cache.StringSet(hike, JsonConvert.SerializeObject(hikeSummary.WeatherDetails), TimeSpan.FromMinutes(CacheUtility.GetMinutesToExpiry()));
         }
 
-        public WeatherUndergroundCacheService(string cacheName)
+        public WeatherUndergroundRedisCacheService(string cacheName)
             : base(cacheName)
         {
         }

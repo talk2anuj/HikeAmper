@@ -7,10 +7,11 @@ using StackExchange.Redis;
 
 namespace HikeService.CacheManagement.Services.impl
 {
-    public class GoogleMapsCacheService: CacheService
+    public class GoogleMapsRedisCacheService: RedisCacheService
     {
-        public override bool PopulateDetails(string hike, HikeSummary hikeSummary)
+        public override bool PopulateDetails(string url, HikeSummary hikeSummary)
         {
+            string hike = CacheUtility.GetCacheKey(url);
             var mapDetails = Cache.StringGet(hike);
             if (mapDetails != RedisValue.Null)
             {
@@ -20,12 +21,13 @@ namespace HikeService.CacheManagement.Services.impl
             return false;
         }
 
-        public override void AddDetails(string hike, HikeSummary hikeSummary)
+        public override void AddDetails(string url, HikeSummary hikeSummary)
         {
+            string hike = CacheUtility.GetCacheKey(url);
             Cache.StringSet(hike, JsonConvert.SerializeObject(hikeSummary.MapDetails), TimeSpan.FromMinutes(CacheUtility.GetMinutesToExpiry()));
         }
 
-        public GoogleMapsCacheService(string cacheName)
+        public GoogleMapsRedisCacheService(string cacheName)
             : base(cacheName)
         {
         }

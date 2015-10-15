@@ -14,7 +14,7 @@ namespace HikeService.HikesModule.Controllers
         public List<HikeSummary> Get(string type, string user, string continuationToken)
 		{
             //Extend if required later: Get the HikeSummaryBuilder based on the url
-            HikeSummaryBuilder summaryBuilder = BuilderFactory.GetHikeSummaryBuilder();
+            SummaryBuilder summaryBuilder = BuilderFactory.GetHikeSummaryBuilder();
 		    IDataStorageService dataStorageService = ServiceFactory.GetStorageService();
 
 		    List<string> urls = dataStorageService.GetUrls(type, user);

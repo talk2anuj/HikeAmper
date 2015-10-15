@@ -1,14 +1,16 @@
 ﻿using System;
 using CommonModels.Hike;
+using HikeService.Utilities;
 using Newtonsoft.Json;
 using StackExchange.Redis;
 
 namespace HikeService.CacheManagement.Services.impl
 {
-    public class WtaHikeCacheService: CacheService
+    public class WtaHikeRedisCacheService: RedisCacheService
     {
-        public override bool PopulateDetails(string hike, HikeSummary hikeSummary)
+        public override bool PopulateDetails(string url, HikeSummary hikeSummary)
         {
+            string hike = CacheUtility.GetCacheKey(url);
             var hikeDetails = Cache.StringGet(hike);
             if (hikeDetails != RedisValue.Null)
             {
@@ -18,13 +20,14 @@ namespace HikeService.CacheManagement.Services.impl
             return false;
         }
 
-        public override void AddDetails(string hike, HikeSummary hikeSummary)
+        public override void AddDetails(string url, HikeSummary hikeSummary)
         {
             //-1 is to avoid overflow
+            string hike = CacheUtility.GetCacheKey(url);
             Cache.StringSet(hike, JsonConvert.SerializeObject(hikeSummary.HikeAndTripDetails.HikeDetails), TimeSpan.FromMinutes(TimeSpan.MaxValue.TotalMinutes-1));
         }
 
-        public WtaHikeCacheService(string cacheName)
+        public WtaHikeRedisCacheService(string cacheName)
             : base(cacheName)
         {
         }

@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\Details.cs" />
     <Compile Include="Hike\HikeAndTripDetails.cs" />
     <Compile Include="Hike\HikeSummary.cs" />
     <Compile Include="Map\GeographicalLocation.cs" />

@@ -6,15 +6,16 @@ using StackExchange.Redis;
 
 namespace HikeService.CacheManagement.Services.impl
 {
-    public class WtaTripCacheService: CacheService
+    public class WtaTripRedisCacheService: RedisCacheService
     {
-        public WtaTripCacheService(string cacheName)
+        public WtaTripRedisCacheService(string cacheName)
             : base(cacheName)
         {
         }
 
-        public override bool PopulateDetails(string hike, HikeSummary hikeSummary)
+        public override bool PopulateDetails(string url, HikeSummary hikeSummary)
         {
+            string hike = CacheUtility.GetCacheKey(url);
             var tripDetails = Cache.StringGet(hike);
             if (tripDetails != RedisValue.Null)
             {
@@ -24,8 +25,9 @@ namespace HikeService.CacheManagement.Services.impl
             return false;
         }
 
-        public override void AddDetails(string hike, HikeSummary hikeSummary)
+        public override void AddDetails(string url, HikeSummary hikeSummary)
         {
+            string hike = CacheUtility.GetCacheKey(url);
             Cache.StringSet(hike, JsonConvert.SerializeObject(hikeSummary.HikeAndTripDetails.TripDetails), TimeSpan.FromMinutes(CacheUtility.GetMinutesToExpiry()));
         }
     }

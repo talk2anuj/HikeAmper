@@ -1,10 +1,11 @@
-﻿using HikeService.HikesModule.Services;
+﻿using CommonModels.Hike;
+using CommonModels.Map;
+using CommonModels.Weather;
+using HikeService.Builders;
 using HikeService.HikesModule.Services.impl;
-using HikeService.MapsModule.Services;
 using HikeService.MapsModule.Services.impl;
 using HikeService.Storage.Services;
 using HikeService.Storage.Services.impl;
-using HikeService.WeatherModule;
 using HikeService.WeatherModule.impl;
 
 namespace HikeService.Factories
@@ -12,15 +13,17 @@ namespace HikeService.Factories
     static class ServiceFactory
     {
         private static AzureDataStorageService _azureStorageService;
-        private static WtaHikeDetailsService _wtaHikeDetailsService;
-        private static WeatherUndergroundService _nationalWeatherDetailsService;
+        private static WtaHikeDetailService _wtaHikeDetailService;
+        private static WtaTripDetailService _wtaTripDetailService;
+        private static WeatherUndergroundService _nationalWeatherDetailService;
         private static GoogleMapsService _googleMapsService;
 
         static ServiceFactory()
          {
              _azureStorageService = new AzureDataStorageService();
-             _wtaHikeDetailsService = new WtaHikeDetailsService();
-             _nationalWeatherDetailsService = new WeatherUndergroundService();
+             _wtaHikeDetailService = new WtaHikeDetailService();
+            _wtaTripDetailService = new WtaTripDetailService();
+             _nationalWeatherDetailService = new WeatherUndergroundService();
             _googleMapsService = new GoogleMapsService();
          }
 
@@ -29,17 +32,22 @@ namespace HikeService.Factories
             return _azureStorageService;
         }
 
-         public static IHikeDetailsService GetHikeDetailsService()
+         public static IDetailService<HikeDetails> GetHikeDetailService()
          {
-             return _wtaHikeDetailsService;
+             return _wtaHikeDetailService;
          }
 
-        public static IWeatherDetailsService GetWeatherDetailsService()
+        public static IDetailService<TripDetails> GetTripDetailService()
         {
-            return _nationalWeatherDetailsService;
+            return _wtaTripDetailService;
         }
 
-        public static IMapsService GetMapsService()
+        public static IDetailService<WeatherDetails[]> GetWeatherDetailService()
+        {
+            return _nationalWeatherDetailService;
+        }
+
+        public static IDetailService<MapDetails> GetMapService()
         {
             return _googleMapsService;
         }
