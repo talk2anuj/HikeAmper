@@ -12,7 +12,6 @@ namespace HikeService.Factories
 {
     static class ServiceFactory
     {
-        private static AzureDataStorageService _azureStorageService;
         private static WtaHikeDetailService _wtaHikeDetailService;
         private static WtaTripDetailService _wtaTripDetailService;
         private static WeatherUndergroundService _nationalWeatherDetailService;
@@ -20,17 +19,11 @@ namespace HikeService.Factories
 
         static ServiceFactory()
          {
-             _azureStorageService = new AzureDataStorageService();
              _wtaHikeDetailService = new WtaHikeDetailService();
             _wtaTripDetailService = new WtaTripDetailService();
              _nationalWeatherDetailService = new WeatherUndergroundService();
             _googleMapsService = new GoogleMapsService();
          }
-
-        public static IDataStorageService GetStorageService()
-        {
-            return _azureStorageService;
-        }
 
          public static IDetailService<HikeDetails> GetHikeDetailService()
          {

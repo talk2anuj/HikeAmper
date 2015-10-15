@@ -110,6 +110,7 @@
     <Compile Include="CacheManagement\Services\ICacheService.cs" />
     <Compile Include="CacheManagement\Services\impl\CacheStubService.cs" />
     <Compile Include="Factories\CacheFactory.cs" />
+    <Compile Include="Factories\StorageFactory.cs" />
     <Compile Include="HikesModule\Services\impl\WtaTripDetailService.cs" />
     <Compile Include="Utilities\CacheUtility.cs" />
     <Compile Include="CacheManagement\Services\RedisCacheService.cs" />

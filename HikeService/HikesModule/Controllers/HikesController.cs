@@ -15,7 +15,7 @@ namespace HikeService.HikesModule.Controllers
 		{
             //Extend if required later: Get the HikeSummaryBuilder based on the url
             SummaryBuilder summaryBuilder = BuilderFactory.GetHikeSummaryBuilder();
-		    IDataStorageService dataStorageService = ServiceFactory.GetStorageService();
+		    IDataStorageService dataStorageService = StorageFactory.GetStorageService();
 
 		    List<string> urls = dataStorageService.GetUrls(type, user);
             //Minimal build all urls
@@ -34,7 +34,7 @@ namespace HikeService.HikesModule.Controllers
 
 		public bool Post (string type, string user, [FromBody] UserData data)
 		{
-		    IDataStorageService dataStorageService = ServiceFactory.GetStorageService();
+		    IDataStorageService dataStorageService = StorageFactory.GetStorageService();
 		    if ((!string.IsNullOrEmpty(data.Value)) && data.Value.StartsWith("http://www.wta.org/") && data.Value.Contains("/go-hiking/hikes/"))
 		    {
 		        return dataStorageService.WriteUrl(user, type, data.Value);
@@ -45,7 +45,7 @@ namespace HikeService.HikesModule.Controllers
 
 	    public bool Delete(string type, string user, [FromBody] UserData data)
 	    {
-            IDataStorageService dataStorageService = ServiceFactory.GetStorageService();
+            IDataStorageService dataStorageService = StorageFactory.GetStorageService();
 	        return dataStorageService.DeleteUrl(user, type, data.Value);
 	    }
 	}
