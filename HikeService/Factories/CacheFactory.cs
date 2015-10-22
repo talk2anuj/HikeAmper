@@ -1,26 +1,34 @@
-﻿using CommonModels.Hike;
+﻿using CacheManagement;
+using CacheManagement.impl;
+using CommonModels;
+using CommonModels.Hike;
 using CommonModels.Map;
 using CommonModels.Weather;
-using HikeService.CacheManagement;
-using HikeService.CacheManagement.Services;
-using HikeService.CacheManagement.Services.impl;
 
 namespace HikeService.Factories
 {
     public class CacheFactory
     {
-        private static RedisCacheService<HikeDetails> _wtaHikeRedisRedisCacheService;
-        private static RedisCacheService<MapDetails> _googleMapsRedisRedisCacheService;
-        private static RedisCacheService<WeatherDetails[]> _weatherUndergroundRedisRedisCacheService;
-        private static RedisCacheService<TripDetails> _tripRedisRedisCacheService;
+        private static RedisCacheService<HikeDetails> _hikeRedisCacheService;
+        private static RedisCacheService<MapDetails> _mapsRedisCacheService;
+        private static RedisCacheService<WeatherDetails[]> _weatherRedisCacheService;
+        private static RedisCacheService<TripDetails> _tripRedisCacheService;
+        private static AzureStorageCacheService<HikeDetails> _hikeAzureStorageCacheService;
+        private static AzureStorageCacheService<TripDetails> _tripAzureStorageCacheService;
+        private static AzureStorageCacheService<WeatherDetails[]> _weatherAzureStorageCacheService;
+        private static AzureStorageCacheService<MapDetails> _mapAzureStorageCacheService;
         private static StubCacheService _stubCacheService;
 
         static CacheFactory()
         {
-            _weatherUndergroundRedisRedisCacheService = new RedisCacheService<WeatherDetails[]>("weathercache");
-            _wtaHikeRedisRedisCacheService = new RedisCacheService<HikeDetails>("hikecache");
-            _googleMapsRedisRedisCacheService = new RedisCacheService<MapDetails>("mapcache");
-            _tripRedisRedisCacheService = new RedisCacheService<TripDetails>("tripcache");
+            _weatherRedisCacheService = new RedisCacheService<WeatherDetails[]>("redisweathercache");
+            _hikeRedisCacheService = new RedisCacheService<HikeDetails>("redishikecache");
+            _mapsRedisCacheService = new RedisCacheService<MapDetails>("redismapcache");
+            _tripRedisCacheService = new RedisCacheService<TripDetails>("redistripcache");
+            _hikeAzureStorageCacheService = new AzureStorageCacheService<HikeDetails>(Constants.HikeServiceStorage, Constants.HikeDetailsTableName);
+            _tripAzureStorageCacheService = new AzureStorageCacheService<TripDetails>(Constants.HikeServiceStorage, Constants.TripDetailsTableName);
+            _weatherAzureStorageCacheService = new AzureStorageCacheService<WeatherDetails[]>(Constants.HikeServiceStorage, Constants.WeatherDetailsTableName);
+            _mapAzureStorageCacheService = new AzureStorageCacheService<MapDetails>(Constants.HikeServiceStorage, Constants.MapDetailsTableName);
             _stubCacheService = new StubCacheService();
         }
 
@@ -29,35 +37,9 @@ namespace HikeService.Factories
             switch (type)
             {
                 case CacheType.Redis:
-                    return _wtaHikeRedisRedisCacheService;
+                    return _hikeRedisCacheService;
                 case CacheType.AzureStorage:
-                    return _stubCacheService;
-                default:
-                    return _stubCacheService;
-            }
-        }
-
-        public static ICacheService GetWeatherCacheService(CacheType type)
-        {
-            switch (type)
-            {
-                case CacheType.Redis:
-                    return _weatherUndergroundRedisRedisCacheService;
-                case CacheType.AzureStorage:
-                    return _stubCacheService;
-                default:
-                    return _stubCacheService;
-            }
-        }
-
-        public static ICacheService GetMapCacheService(CacheType type)
-        {
-            switch (type)
-            {
-                case CacheType.Redis:
-                    return _googleMapsRedisRedisCacheService;
-                case CacheType.AzureStorage:
-                    return _stubCacheService;
+                    return _hikeAzureStorageCacheService;
                 default:
                     return _stubCacheService;
             }
@@ -68,9 +50,35 @@ namespace HikeService.Factories
             switch (type)
             {
                 case CacheType.Redis:
-                    return _tripRedisRedisCacheService;
+                    return _tripRedisCacheService;
                 case CacheType.AzureStorage:
+                    return _tripAzureStorageCacheService;
+                default:
                     return _stubCacheService;
+            }
+        }
+
+        public static ICacheService GetWeatherCacheService(CacheType type)
+        {
+            switch (type)
+            {
+                case CacheType.Redis:
+                    return _weatherRedisCacheService;
+                case CacheType.AzureStorage:
+                    return _weatherAzureStorageCacheService;
+                default:
+                    return _stubCacheService;
+            }
+        }
+
+        public static ICacheService GetMapCacheService(CacheType type)
+        {
+            switch (type)
+            {
+                case CacheType.Redis:
+                    return _mapsRedisCacheService;
+                case CacheType.AzureStorage:
+                    return _mapAzureStorageCacheService;
                 default:
                     return _stubCacheService;
             }

@@ -2,10 +2,12 @@
 using System.Linq;
 using System.Threading;
 using System.Web.Http;
+using CommonModels.Common;
 using CommonModels.Hike;
-using HikeService.Builders;
+using CommonModels.Storage;
+using DetailServices.Builders;
 using HikeService.Factories;
-using HikeService.Storage.Services;
+using Storage;
 
 namespace HikeService.Controllers
 {
@@ -13,40 +15,33 @@ namespace HikeService.Controllers
 	{
         public List<HikeSummary> Get(string type, string user, string continuationToken)
 		{
-            //Extend if required later: Get the HikeSummaryBuilder based on the url
+            //Extend if required later: Get the HikeSummaryBuilder based on the URL
             SummaryBuilder summaryBuilder = BuilderFactory.GetHikeSummaryBuilder();
-		    IDataStorageService dataStorageService = StorageFactory.GetStorageService();
+		    IDataStorageService dataStorageService = StorageFactory.GetStorageService<HikeDataEntity>(StorageType.AzureStorage);
 
-		    List<string> urls = dataStorageService.GetUrls(type, user);
-            //Minimal build all urls
+		    List<HikeDataEntity> entities = dataStorageService.GetEntities<HikeDataEntity>(user);
+            List<string> urls = new List<string>();
+            urls.AddRange(entities.OrderBy(entity => entity.Timestamp).Select(entity => entity.Url));
 
-            //Based on continuation token, full build just few and return those only
-            int index = int.Parse(continuationToken) * 8;
-            if (index > 0)
-            {
-                int count = index + 8 <= urls.Count ? 8 : urls.Count - index;
-                urls = urls.GetRange(index, count);
-                Thread.Sleep(60000);
-                return urls.Select(url => summaryBuilder.Build(url, false)).ToList();
-            }
-            return urls.Select(url => summaryBuilder.Build(url, true)).ToList();
+            return urls.Select(url => summaryBuilder.Build(url, user)).ToList();
 		}
 
 		public bool Post (string type, string user, [FromBody] UserData data)
 		{
-		    IDataStorageService dataStorageService = StorageFactory.GetStorageService();
+		    var dataStorageService = StorageFactory.GetStorageService<HikeDataEntity>(StorageType.AzureStorage);
 		    if ((!string.IsNullOrEmpty(data.Value)) && data.Value.StartsWith("http://www.wta.org/") && data.Value.Contains("/go-hiking/hikes/"))
 		    {
-		        return dataStorageService.WriteUrl(user, type, data.Value);
-		    } else {
-                return false;
+                HikeDataEntity entity = new HikeDataEntity(user, data.Value);
+                return dataStorageService.InsertEntity(entity);
 		    }
+		    return false;
 		}
 
 	    public bool Delete(string type, string user, [FromBody] UserData data)
 	    {
-            IDataStorageService dataStorageService = StorageFactory.GetStorageService();
-	        return dataStorageService.DeleteUrl(user, type, data.Value);
+            var dataStorageService = StorageFactory.GetStorageService<HikeDataEntity>(StorageType.AzureStorage);
+            HikeDataEntity entity = new HikeDataEntity(user, data.Value);
+            return dataStorageService.DeleteEntity(entity);
 	    }
 	}
 

@@ -29,7 +29,7 @@
 @if (Model.Count() > 0)
 {
     <h2>My Hike Details</h2>
-    
+
     <table class="table">
         <tr>
             <th>
@@ -49,7 +49,7 @@
             @for (int i=0; i<4; i++)
             {
                 <th>
-                    Weather<br />                    
+                    Weather<br />
                 </th>
             }
             <th>
@@ -68,21 +68,21 @@
         {
             <tr>
                 <td>
-                    <a href=@item.HikeAndTripDetails.HikeDetails.Url target="_blank">@item.HikeAndTripDetails.HikeDetails.Name</a>
+                    <a href=@item.HikeDetails.Url target="_blank">@item.HikeDetails.Name</a>
                 </td>
                 <td>
-                    @item.HikeAndTripDetails.HikeDetails.LocationName
+                    @item.HikeDetails.LocationName
                 </td>
                 <td>
-                    <b>@item.HikeAndTripDetails.HikeDetails.RoundTripLength</b>
+                    <b>@item.HikeDetails.RoundTripLength</b>
                 </td>
                 <td>
                     Gain:
                     <b>
-                        @item.HikeAndTripDetails.HikeDetails.ElevationDetails.Gain
+                        @item.HikeDetails.ElevationDetails.Gain
                     </b> <br/><br/>
                     Highest Point:
-                    @item.HikeAndTripDetails.HikeDetails.ElevationDetails.HighestPoint<br/>
+                    @item.HikeDetails.ElevationDetails.HighestPoint<br/>
                 </td>
                 @if (@item.WeatherDetails == null)
                 {
@@ -116,25 +116,25 @@
                      }
                 }
                 <td>
-                    <a href=@item.HikeAndTripDetails.TripDetails.Url target="_blank">@item.HikeAndTripDetails.TripDetails.Date</a><br/>
-                    @item.HikeAndTripDetails.TripDetails.TypeOfHike <br/>
-                    @item.HikeAndTripDetails.TripDetails.TrailCondition <br/>
-                    @item.HikeAndTripDetails.TripDetails.SnowCondition <br/>
-                    @item.HikeAndTripDetails.TripDetails.RoadCondition <br/>
-                    @item.HikeAndTripDetails.TripDetails.BugsCondition <br/><br/>
-                    <a href=@item.HikeAndTripDetails.HikeDetails.TripReportsUrl target="_blank">Other Reports</a><br/>
+                    <a href=@item.TripDetails.Url target="_blank">@item.TripDetails.Date</a><br/>
+                    @item.TripDetails.TypeOfHike <br/>
+                    @item.TripDetails.TrailCondition <br/>
+                    @item.TripDetails.SnowCondition <br/>
+                    @item.TripDetails.RoadCondition <br/>
+                    @item.TripDetails.BugsCondition <br/><br/>
+                    <a href=@item.HikeDetails.TripReportsUrl target="_blank">Other Reports</a><br/>
                 </td>
                 <td>
                     @item.MapDetails.Distance<br/><br/>
                     <b>@item.MapDetails.Duration</b><br/>
                 </td>
                 <td>
-                    @item.HikeAndTripDetails.HikeDetails.PassRequired
+                    @item.HikeDetails.PassRequired
                 </td>
                 <td>
                     @using (Html.BeginForm("Delete", "Hike"))
                     {
-                        <input type="hidden" name="hikeUrl" value="@item.HikeAndTripDetails.HikeDetails.Url"/>
+                        <input type="hidden" name="hikeUrl" value="@item.HikeDetails.Url"/>
                         <input type="image" src="~/Images/trash.png" name="Delete" value="Delete"/>
                     }
                 </td>

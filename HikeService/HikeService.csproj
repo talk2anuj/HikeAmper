@@ -104,38 +104,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Builders\DetailBuilder.cs" />
-    <Compile Include="CacheManagement\CacheType.cs" />
-    <Compile Include="CacheManagement\Services\impl\AzureStorageCacheService.cs" />
-    <Compile Include="CacheManagement\Services\impl\RedisCacheService.cs" />
-    <Compile Include="CacheManagement\Services\ICacheService.cs" />
-    <Compile Include="CacheManagement\Services\impl\StubCacheService.cs" />
     <Compile Include="Factories\CacheFactory.cs" />
     <Compile Include="Factories\StorageFactory.cs" />
-    <Compile Include="DetailServices\impl\WtaTripDetailService.cs" />
-    <Compile Include="DetailServices\IDetailService.cs" />
-    <Compile Include="Utilities\CacheUtility.cs" />
     <Compile Include="Factories\BuilderFactory.cs" />
     <Compile Include="Factories\ServiceFactory.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Builders\SummaryBuilder.cs" />
     <Compile Include="Controllers\HikesController.cs" />
-    <Compile Include="DetailServices\impl\WtaHikeDetailService.cs" />
-    <Compile Include="DetailServices\impl\GoogleMapsService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Storage\Constants.cs" />
-    <Compile Include="Storage\Models\HikeDataEntity.cs" />
-    <Compile Include="Storage\Models\UserDataEntity.cs" />
-    <Compile Include="Storage\Services\DataStorageService.cs" />
-    <Compile Include="Storage\Services\impl\AzureDataStorageService.cs" />
-    <Compile Include="Storage\Services\impl\FileDataStorageService.cs" />
-    <Compile Include="Storage\Utilities\ResultUtility.cs" />
-    <Compile Include="Storage\Utilities\StorageUtility.cs" />
-    <Compile Include="Utilities\HikeDocumentUtility.cs" />
-    <Compile Include="Utilities\WebClientUtility.cs" />
-    <Compile Include="DetailServices\impl\WeatherUndergroundService.cs" />
+    <Compile Include="Result.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -151,10 +129,25 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CacheManagement\CacheManagement.csproj">
+      <Project>{33BA4C56-B080-4ABA-A53D-1D55E6DE3355}</Project>
+      <Name>CacheManagement</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CommonModels\CommonModels.csproj">
       <Project>{aec7fa8a-3373-4dad-9879-02d0f6092f40}</Project>
       <Name>CommonModels</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DetailServices\DetailServices.csproj">
+      <Project>{6B83B504-BB23-43BC-8C21-D2AF507CDC66}</Project>
+      <Name>DetailServices</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Storage\Storage.csproj">
+      <Project>{5A262922-F348-4C51-A680-C55351A05654}</Project>
+      <Name>Storage</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

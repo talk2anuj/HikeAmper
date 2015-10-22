@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Text.RegularExpressions;
 using System.Web.Mvc;
+using CommonModels.Common;
 using CommonModels.Hike;
 using Newtonsoft.Json;
 
@@ -14,63 +15,60 @@ namespace HikeAmper.Controllers
     {
         public ActionResult Add(FormCollection form)
         {
-            if (!String.IsNullOrEmpty(User.Identity.Name))
-            {
-                var userName = GetUserName(User.Identity.Name);
-                WebRequest request =
-                    WebRequest.Create("http://hikeservice.azurewebsites.net/hikes/" + userName);
-                request.Method = "POST";
-                request.ContentType = "application/json";
-                var writer = new StreamWriter(request.GetRequestStream());
-                var hikeUrl = form["hikeUrl"];
-                var data = "{\"Value\":\"" + hikeUrl + "\"";
-                writer.Write(data);
-                writer.Flush();
-                request.GetResponse();
-                return RedirectToAction("MyHikeDetails", "Hike");
-            }
-            else
+            if (String.IsNullOrEmpty(User.Identity.Name))
             {
                 return View("Login");
             }
+            var userName = GetUserName(User.Identity.Name);
+            WebRequest request =
+                WebRequest.Create("http://hikeservice.azurewebsites.net/hikes/" + userName);
+            request.Method = "POST";
+            request.ContentType = "application/json";
+            var writer = new StreamWriter(request.GetRequestStream());
+            var hikeUrl = form["hikeUrl"];
+            var data = "{\"Value\":\"" + hikeUrl + "\"";
+            writer.Write(data);
+            writer.Flush();
+            request.GetResponse();
+            return RedirectToAction("MyHikeDetails", "Hike");
         }
 
         public ActionResult Delete(FormCollection form)
         {
-            if (!String.IsNullOrEmpty(User.Identity.Name))
+            if (String.IsNullOrEmpty(User.Identity.Name))
             {
-                var userName = GetUserName(User.Identity.Name);
-                WebRequest request =
-                    WebRequest.Create("http://hikeservice.azurewebsites.net/hikes/" + userName);
-                request.Method = "DELETE";
-                request.ContentType = "application/json";
-                var writer = new StreamWriter(request.GetRequestStream());
-                var hikeUrl = form["hikeUrl"];
-                var data = "{\"Value\":\"" + hikeUrl + "\"";
-                writer.Write(data);
-                writer.Flush();
-                request.GetResponse();
-                return RedirectToAction("MyHikeDetails", "Hike");
+                return View("Login");
             }
-            return View("Login");
+            var userName = GetUserName(User.Identity.Name);
+            WebRequest request =
+                WebRequest.Create("http://hikeservice.azurewebsites.net/hikes/" + userName);
+            request.Method = "DELETE";
+            request.ContentType = "application/json";
+            var writer = new StreamWriter(request.GetRequestStream());
+            var hikeUrl = form["hikeUrl"];
+            var data = "{\"Value\":\"" + hikeUrl + "\"";
+            writer.Write(data);
+            writer.Flush();
+            request.GetResponse();
+            return RedirectToAction("MyHikeDetails", "Hike");
         }
 
         public ActionResult MyHikeDetails(FormCollection form)
         {
-            if (!String.IsNullOrEmpty(User.Identity.Name))
+            if (String.IsNullOrEmpty(User.Identity.Name))
             {
-                var userName = GetUserName(User.Identity.Name);
-                WebRequest request =
-                    WebRequest.Create("http://hikeservice.azurewebsites.net/hikes/" + userName);
-                request.Method = "GET";
-                request.ContentType = "application/json";
-                var response = request.GetResponse();
-                var reader = new StreamReader(response.GetResponseStream());
-                var responseData = reader.ReadToEnd();
-                HikeSummary[] myHikesData = JsonConvert.DeserializeObject<HikeSummary[]>(responseData);
-                return View("../Home/Index", myHikesData.ToList());
+                return View("Login");
             }
-            return View("Login");
+            var userName = GetUserName(User.Identity.Name);
+            WebRequest request =
+                WebRequest.Create("http://hikeservice.azurewebsites.net/hikes/" + userName);
+            request.Method = "GET";
+            request.ContentType = "application/json";
+            var response = request.GetResponse();
+            var reader = new StreamReader(response.GetResponseStream());
+            var responseData = reader.ReadToEnd();
+            HikeSummary[] myHikesData = JsonConvert.DeserializeObject<HikeSummary[]>(responseData);
+            return View("../Home/Index", myHikesData.ToList());
         }
 
         public class UserData

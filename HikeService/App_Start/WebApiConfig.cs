@@ -1,5 +1,5 @@
 ﻿using System.Web.Http;
-using HikeService.Storage;
+using CommonModels;
 
 namespace HikeService
 {
