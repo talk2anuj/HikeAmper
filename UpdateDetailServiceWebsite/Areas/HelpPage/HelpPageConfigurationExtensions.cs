@@ -13,6 +13,7 @@ using System.Web.Http.Controllers;
 using System.Web.Http.Description;
 using UpdateDetailServiceWebsite.Areas.HelpPage.ModelDescriptions;
 using UpdateDetailServiceWebsite.Areas.HelpPage.Models;
+using UpdateDetailServiceWebsite.Areas.HelpPage.SampleGeneration;
 
 namespace UpdateDetailServiceWebsite.Areas.HelpPage
 {

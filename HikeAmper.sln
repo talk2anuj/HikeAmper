@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HikeAmperWebsite", "HikeAmper\HikeAmperWebsite.csproj", "{9378FE14-4308-4BAF-9AC4-71E9A8E8D2C5}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HikeService", "HikeService\HikeService.csproj", "{9C1F20CA-354D-4FF7-8BAC-02098E68B4E6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommonModels", "CommonModels\CommonModels.csproj", "{AEC7FA8A-3373-4DAD-9879-02D0F6092F40}"
@@ -19,16 +17,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CacheManagement", "CacheMan
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UpdateDetailServiceWebsite", "UpdateDetailServiceWebsite\UpdateDetailServiceWebsite.csproj", "{3E326590-5F9A-49A6-97C6-4404B0F34959}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HikeAmperWebsite", "HikeAmperWebsite\HikeAmperWebsite.csproj", "{9378FE14-4308-4BAF-9AC4-71E9A8E8D2C5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{9378FE14-4308-4BAF-9AC4-71E9A8E8D2C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9378FE14-4308-4BAF-9AC4-71E9A8E8D2C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9378FE14-4308-4BAF-9AC4-71E9A8E8D2C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9378FE14-4308-4BAF-9AC4-71E9A8E8D2C5}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9C1F20CA-354D-4FF7-8BAC-02098E68B4E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9C1F20CA-354D-4FF7-8BAC-02098E68B4E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9C1F20CA-354D-4FF7-8BAC-02098E68B4E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -57,6 +53,10 @@ Global
 		{3E326590-5F9A-49A6-97C6-4404B0F34959}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3E326590-5F9A-49A6-97C6-4404B0F34959}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3E326590-5F9A-49A6-97C6-4404B0F34959}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9378FE14-4308-4BAF-9AC4-71E9A8E8D2C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9378FE14-4308-4BAF-9AC4-71E9A8E8D2C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9378FE14-4308-4BAF-9AC4-71E9A8E8D2C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9378FE14-4308-4BAF-9AC4-71E9A8E8D2C5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
