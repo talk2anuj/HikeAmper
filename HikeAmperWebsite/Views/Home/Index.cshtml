@@ -1,4 +1,6 @@
-﻿@{
+﻿@Scripts.Render("~/bundles/myBundle")
+
+@{
     ViewBag.Title = "Home Page";
 }
 
@@ -9,6 +11,7 @@
     <p class="lead">This application allows you to aggregate information about all interested hikes to help you choose a hike.</p>
 </div>
 
+<input type="hidden" id="user" value="@HttpContext.Current.User.Identity.Name">
 
 <div class="row">
     @using (Html.BeginForm("Add", "Hike"))
@@ -18,16 +21,13 @@
             <p>
                 Find a hike from WTA and add it to the list of your hikes.
             </p>
-            <input type="text" name="hikeUrl" />
-            <input type="submit" class="btn btn-primary" name="Go" value="Go" />
+            <input type="text" name="hikeUrl"/>
+            <input type="submit" class="btn btn-primary" name="Go" value="Go"/>
         </div>
     }
 </div>
 
-@model IEnumerable<CommonModels.Hike.HikeSummary>
-
-@if (Model.Count() > 0)
-{
+<!-- ko if: summary().length > 0 -->
     <h2>My Hike Details</h2>
 
     <table class="table">
@@ -39,21 +39,21 @@
                 Location Name
             </th>
             <th>
-                Round tripDetails<br />
+                Round tripDetails<br/>
                 (In miles)
             </th>
             <th>
                 Elevation<br/>
                 (In feet)
             </th>
-            @for (int i=0; i<4; i++)
+            @for (int i = 0; i < 4; i++)
             {
                 <th>
-                    Weather<br />
+                    Weather<br/>
                 </th>
             }
             <th>
-                Latest Trip Report<br />
+                Latest Trip Report<br/>
             </th>
             <th>
                 Distance<br/>
@@ -64,89 +64,72 @@
             </th>
         </tr>
 
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    <a href=@item.HikeDetails.Url target="_blank">@item.HikeDetails.Name</a>
-                </td>
-                <td>
-                    @item.HikeDetails.LocationName
-                </td>
-                <td>
-                    <b>@item.HikeDetails.RoundTripLength</b>
-                </td>
-                <td>
-                    Gain:
-                    <b>
-                        @item.HikeDetails.ElevationDetails.Gain
-                    </b> <br/><br/>
-                    Highest Point:
-                    @item.HikeDetails.ElevationDetails.HighestPoint<br/>
-                </td>
-                @if (@item.WeatherDetails == null)
+        <tbody data-bind="foreach: summary">
+        <tr>
+            <td>
+                <a data-bind="attr: { href: HikeDetails.Url, _blank: true }">
+                    <span data-bind="text: HikeDetails.Name"></span>
+                </a>
+            </td>
+            <td data-bind="text: HikeDetails.LocationName"/>
+            <td data-bind="text: HikeDetails.RoundTripLength"/>
+            <td>
+                Gain:
+                <b data-bind="text: HikeDetails.ElevationDetails.Gain"></b>
+                <br/><br/>
+                Highest Point:
+                <b data-bind="text: HikeDetails.ElevationDetails.HighestPoint"></b>
+            </td>
+            <!-- ko foreach: WeatherDetails -->
+            <td>
+                <b data-bind="text: Date.Weekday_Short() + ' ' + Date.Monthname_Short() + ' ' + Date.Day()"></b>
+                <br/><br/>
+                <b data-bind="text: 'Rain -' + Pop() + '%'"></b>
+                <br /><br />
+                <table class="table-condensed">
+                    <tr>
+                        <th>High</th>
+                        <th>Low</th>
+                    </tr>
+                    <tr>
+                        <td data-bind="text: High.Celsius() + '°C'"></td>
+                        <td data-bind="text: Low.Celsius() + '°C'"></td>
+                    </tr>
+                </table>
+            </td>
+            <!-- /ko -->
+            <td>
+                <a data-bind="attr: { href: TripDetails.Url, _blank: true }">
+                    <span data-bind="text: TripDetails.Date"></span>
+                </a><br/><br/>
+                <span data-bind="text: TripDetails.TypeOfHike"></span><br/>
+                <span data-bind="text: TripDetails.TrailCondition"></span><br/>
+                <span data-bind="text: TripDetails.SnowCondition"></span><br/>
+                <span data-bind="text: TripDetails.RoadCondition"></span><br/>
+                <span data-bind="text: TripDetails.BugsCondition"></span><br/>
+                <a data-bind="attr: { href: HikeDetails.TripReportsUrl, _blank: true }">
+                    Other Reports
+                </a>
+            </td>
+            <td>
+                <span data-bind="text: MapDetails.Distance"></span>
+                <br/><br/>
+                <b data-bind="text: MapDetails.Duration"></b>
+            </td>
+            <td data-bind="text: HikeDetails.PassRequired"></td>
+            <td>
+                @using (Html.BeginForm("Delete", "Hike"))
                 {
-                    for (int i = 0; i < 4; i++)
-                    {
-                        <td>NA</td>
-                    }
+                    <input type="hidden" name="hikeUrl" data-bind="attr: {value: HikeDetails.Url}"/>
+                    <input type="image" src="~/Images/trash.png" name="Delete" value="Delete" />
                 }
-                else
-                {
-                    foreach (var weather in @item.WeatherDetails)
-                     {
-                         <td>
-                             <b>@String.Format("{0}, {1} {2}", @weather.Date.Weekday_Short, @weather.Date.Monthname_Short, @weather.Date.Day)</b><br /><br />
-                             @String.Format("Rain  -  {0}%", @weather.Pop)<br/>
-                             <table class="table-condensed">
-                                 <tr>
-                                     <th>High</th>
-                                     <th>Low</th>
-                                 </tr>
-                                 <tr>
-                                     <td>
-                                         @String.Format("{0}°C", @weather.High.Celsius)
-                                     </td>
-                                     <td>
-                                         @String.Format("{0}°C", @weather.Low.Celsius)
-                                     </td>
-                                 </tr>
-                             </table>
-                         </td>
-                     }
-                }
-                <td>
-                    <a href=@item.TripDetails.Url target="_blank">@item.TripDetails.Date</a><br/>
-                    @item.TripDetails.TypeOfHike <br/>
-                    @item.TripDetails.TrailCondition <br/>
-                    @item.TripDetails.SnowCondition <br/>
-                    @item.TripDetails.RoadCondition <br/>
-                    @item.TripDetails.BugsCondition <br/><br/>
-                    <a href=@item.HikeDetails.TripReportsUrl target="_blank">Other Reports</a><br/>
-                </td>
-                <td>
-                    @item.MapDetails.Distance<br/><br/>
-                    <b>@item.MapDetails.Duration</b><br/>
-                </td>
-                <td>
-                    @item.HikeDetails.PassRequired
-                </td>
-                <td>
-                    @using (Html.BeginForm("Delete", "Hike"))
-                    {
-                        <input type="hidden" name="hikeUrl" value="@item.HikeDetails.Url"/>
-                        <input type="image" src="~/Images/trash.png" name="Delete" value="Delete"/>
-                    }
-                </td>
-            </tr>
-        }
-
+            </td>
+        </tr>
     </table>
-}
-else
-{
+<!-- /ko -->
+<!-- ko ifnot: summary().length > 0 -->
     <h2>No hikes found in your account.</h2>
     <p>
         Please add hikes before trying to view details about hikes.
     </p>
-}
+<!-- /ko -->
