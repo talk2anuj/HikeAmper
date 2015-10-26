@@ -1,6 +1,6 @@
 ﻿var summary;
-var hikeExists = ko.observable(false);
-var hikeUrl = ko.observable("");
+var HikeUrl = ko.observable("");
+var HikeExists = ko.observable(false);
 
 function GetName() {
     var user = document.getElementById("user").defaultValue;
@@ -9,8 +9,8 @@ function GetName() {
 }
 
 $(document).ready(function () {
-    hikeExists(false);
     var user = GetName();
+    HikeExists(false);
     $.ajax({
         url: "https://hikeservice.azurewebsites.net/hikes/" + user,
         contentType: "application/json",
@@ -28,8 +28,9 @@ $(document).ready(function () {
 
 function AddHike() {
     var user = GetName();
-    var data = "{\"Value\":\"" + hikeUrl() + "\"";
-    hikeUrl("");
+    var data = "{\"Value\":\"" + HikeUrl() + "\"";
+    HikeUrl("");
+    HikeExists(false);
     $.ajax({
         url: "https://hikeservice.azurewebsites.net/hikes/" + user,
         contentType: "application/json",
@@ -40,8 +41,9 @@ function AddHike() {
             var hikeDetails = ko.mapping.fromJS(data);
             if (hikeDetails().length > 0) {
                 summary.push(hikeDetails()[0]);
+            } else {
+                HikeExists(true);
             }
-            hikeExists(hikeDetails().length === 0);
         },
         error: function (jqxhr, textStatus, errorThrown) {
             console.log(textStatus);
@@ -53,6 +55,7 @@ function AddHike() {
 function DeleteHike(hike) {
     var user = GetName();
     var data = "{\"Value\":\"" + hike.Url() + "\"";
+    HikeExists(false);
     $.ajax({
         url: "https://hikeservice.azurewebsites.net/hikes/" + user,
         contentType: "application/json",
