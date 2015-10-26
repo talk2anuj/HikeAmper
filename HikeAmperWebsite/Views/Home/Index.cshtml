@@ -14,17 +14,18 @@
 <input type="hidden" id="user" value="@HttpContext.Current.User.Identity.Name">
 
 <div class="row">
-    @using (Html.BeginForm("Add", "Hike"))
-    {
-        <div class="col-md-4">
-            <h2>Add a hike</h2>
-            <p>
-                Find a hike from WTA and add it to the list of your hikes.
-            </p>
-            <input type="text" name="hikeUrl"/>
-            <input type="submit" class="btn btn-primary" name="Go" value="Go"/>
-        </div>
-    }
+    <div class="col-md-4">
+        <h2>Add a hike</h2>
+        <p>
+            Find a hike from WTA and add it to the list of your hikes.
+        </p>
+        <input type="text" data-bind="value: hikeUrl"/>
+        <input type="button" class="btn btn-primary" onclick="AddHike()" value="Submit"/>
+        <br/>
+        <!-- ko if: hikeExists -->
+        <span style="color:red">Hike is already present!</span>
+        <!-- /ko -->
+    </div>
 </div>
 
 <!-- ko if: summary().length > 0 -->
@@ -118,11 +119,12 @@
             </td>
             <td data-bind="text: HikeDetails.PassRequired"></td>
             <td>
-                @using (Html.BeginForm("Delete", "Hike"))
-                {
-                    <input type="hidden" name="hikeUrl" data-bind="attr: {value: HikeDetails.Url}"/>
-                    <input type="image" src="~/Images/trash.png" name="Delete" value="Delete" />
-                }
+@*                @using (Html.BeginForm("Delete", "Hike"))*@
+@*                {*@
+@*                    <input type="hidden" id="deleteUrl" data-bind="attr: {value: HikeDetails.Url}"/>*@
+                    <input type="image" src="~/Images/trash.png" data-bind="click: DeleteHike.bind()" />
+@*                    <input type="image" src="~/Images/trash.png" name="Delete" value="Delete" />*@
+@*                }*@
             </td>
         </tr>
     </table>
