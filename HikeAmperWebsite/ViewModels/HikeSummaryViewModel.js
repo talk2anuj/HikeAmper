@@ -63,7 +63,7 @@ function DeleteHike(hike) {
         data: data,
         async: false,
         success: function () {
-            summary.pop(hike);
+            summary.remove(hike);
         },
         error: function (jqxhr, textStatus, errorThrown) {
             console.log(textStatus);
