@@ -1,18 +1,18 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using CacheManagement;
-using CommonModels.Hike;
-using CommonModels.Storage;
+﻿using CacheManagement;
+using Common.Models.Hike;
+using Common.Models.Storage;
 using DetailServices.Builders;
 using Storage;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
 using UpdateDetailService.Factories;
 
 namespace UpdateDetailService
 {
-    class Program
+    internal class Program
     {
-        static void Main()
+        private static void Main()
         {
             var hikeDataEntities = GetHikeDataEntities();
             var hikeSummaryList = GetHikeSummaryList(hikeDataEntities);

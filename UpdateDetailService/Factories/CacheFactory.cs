@@ -1,9 +1,9 @@
 ﻿using CacheManagement;
 using CacheManagement.impl;
-using CommonModels;
-using CommonModels.Hike;
-using CommonModels.Map;
-using CommonModels.Weather;
+using Common;
+using Common.Models.Hike;
+using Common.Models.Map;
+using Common.Models.Weather;
 
 namespace UpdateDetailService.Factories
 {
@@ -38,8 +38,10 @@ namespace UpdateDetailService.Factories
             {
                 case CacheType.Redis:
                     return _hikeRedisCacheService;
+
                 case CacheType.AzureStorage:
                     return _hikeAzureStorageCacheService;
+
                 default:
                     return _stubCacheService;
             }
@@ -51,8 +53,10 @@ namespace UpdateDetailService.Factories
             {
                 case CacheType.Redis:
                     return _tripRedisCacheService;
+
                 case CacheType.AzureStorage:
                     return _tripAzureStorageCacheService;
+
                 default:
                     return _stubCacheService;
             }
@@ -64,8 +68,10 @@ namespace UpdateDetailService.Factories
             {
                 case CacheType.Redis:
                     return _weatherRedisCacheService;
+
                 case CacheType.AzureStorage:
                     return _weatherAzureStorageCacheService;
+
                 default:
                     return _stubCacheService;
             }
@@ -77,8 +83,10 @@ namespace UpdateDetailService.Factories
             {
                 case CacheType.Redis:
                     return _mapsRedisCacheService;
+
                 case CacheType.AzureStorage:
                     return _mapAzureStorageCacheService;
+
                 default:
                     return _stubCacheService;
             }

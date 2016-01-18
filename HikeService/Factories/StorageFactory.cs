@@ -1,5 +1,5 @@
-﻿using CommonModels;
-using CommonModels.Storage;
+﻿using Common;
+using Common.Models.Storage;
 using Storage;
 using Storage.impl;
 
@@ -22,8 +22,10 @@ namespace HikeService.Factories
             {
                 case StorageType.AzureStorage:
                     return GetAzureStorageService<T>();
+
                 case StorageType.FileStorage:
                     return _fileHikeStorageService;
+
                 default:
                     return _azureHikeStorageService;
             }

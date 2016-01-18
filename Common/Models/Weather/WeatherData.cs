@@ -1,4 +1,4 @@
-﻿namespace CommonModels.Weather
+﻿namespace Common.Models.Weather
 {
     public class WeatherData
     {
@@ -14,6 +14,7 @@
     {
         public WeatherDetails[] Forecastday { get; set; }
     }
+
     public class WeatherDetails
     {
         public Date Date { get; set; }
@@ -26,7 +27,6 @@
         public int Avehumidity { get; set; }
         public int Maxhumidity { get; set; }
         public int Minhumidity { get; set; }
-
     }
 
     public class Date

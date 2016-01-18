@@ -1,4 +1,4 @@
-﻿namespace CommonModels.Map
+﻿namespace Common.Models.Map
 {
     public class GeographicalLocation
     {

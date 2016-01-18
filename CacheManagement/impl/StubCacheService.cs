@@ -1,4 +1,4 @@
-﻿using CommonModels.Hike;
+﻿using Common.Models.Hike;
 
 namespace CacheManagement.impl
 {

@@ -1,5 +1,4 @@
-﻿using CommonModels.Common;
-using CommonModels.Hike;
+﻿using Common.Models.Hike;
 
 namespace DetailServices
 {

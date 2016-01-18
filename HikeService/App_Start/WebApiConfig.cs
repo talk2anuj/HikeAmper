@@ -1,5 +1,5 @@
 ﻿using System.Web.Http;
-using CommonModels;
+using Common;
 
 namespace HikeService
 {

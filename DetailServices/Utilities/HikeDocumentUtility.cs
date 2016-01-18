@@ -1,8 +1,8 @@
-﻿using System;
-using System.Linq;
-using CommonModels.Hike;
-using CommonModels.Map;
+﻿using Common.Models.Hike;
+using Common.Models.Map;
 using HtmlAgilityPack;
+using System;
+using System.Linq;
 
 namespace DetailServices.Utilities
 {
@@ -21,7 +21,6 @@ namespace DetailServices.Utilities
         private static string _notAvailable = "Not Available";
         private static string _passRequiredInfo = "pass-required-info";
 
-
         public static T GetInfoFromDocument<T>(Func<HtmlDocument, T> func, HtmlDocument doc)
         {
             try
@@ -34,6 +33,7 @@ namespace DetailServices.Utilities
             }
             return default(T);
         }
+
         public static string GetName(HtmlDocument doc)
         {
             var name = _notAvailable;
@@ -61,7 +61,7 @@ namespace DetailServices.Utilities
                     if (node.InnerText.Contains("Elevation"))
                     {
                         var innerNodes = node.SelectNodes("div");
-                        foreach(var innerNode in innerNodes)
+                        foreach (var innerNode in innerNodes)
                         {
                             if (innerNode.InnerText.Contains("Gain"))
                             {

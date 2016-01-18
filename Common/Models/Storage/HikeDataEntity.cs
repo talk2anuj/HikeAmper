@@ -1,8 +1,8 @@
 ﻿using Microsoft.WindowsAzure.Storage.Table;
 
-namespace CommonModels.Storage
+namespace Common.Models.Storage
 {
-    public class HikeDataEntity: TableEntity
+    public class HikeDataEntity : TableEntity
     {
         public string Url { get; set; }
 

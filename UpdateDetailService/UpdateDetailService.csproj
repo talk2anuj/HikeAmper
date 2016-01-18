@@ -88,9 +88,9 @@
       <Project>{33BA4C56-B080-4ABA-A53D-1D55E6DE3355}</Project>
       <Name>CacheManagement</Name>
     </ProjectReference>
-    <ProjectReference Include="..\CommonModels\CommonModels.csproj">
-      <Project>{AEC7FA8A-3373-4DAD-9879-02D0F6092F40}</Project>
-      <Name>CommonModels</Name>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{aec7fa8a-3373-4dad-9879-02d0f6092f40}</Project>
+      <Name>Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\DetailServices\DetailServices.csproj">
       <Project>{6B83B504-BB23-43BC-8C21-D2AF507CDC66}</Project>

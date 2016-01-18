@@ -1,4 +1,4 @@
-﻿namespace CommonModels.Hike
+﻿namespace Common.Models.Hike
 {
     public class TripDetails
     {

@@ -1,9 +1,9 @@
-﻿using System;
-using System.Configuration;
-using System.Linq;
-using CommonModels.Hike;
+﻿using Common.Models.Hike;
 using Newtonsoft.Json;
 using StackExchange.Redis;
+using System;
+using System.Configuration;
+using System.Linq;
 
 namespace CacheManagement.impl
 {
@@ -11,6 +11,7 @@ namespace CacheManagement.impl
     {
         public string CacheName;
         public IDatabase Cache;
+
         public RedisCacheService(string cacheName)
         {
             CacheName = cacheName;

@@ -1,4 +1,4 @@
-﻿namespace CommonModels.Storage
+﻿namespace Common.Models.Storage
 {
     public enum StorageType
     {

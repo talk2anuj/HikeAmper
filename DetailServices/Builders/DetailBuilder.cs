@@ -1,5 +1,5 @@
 ﻿using CacheManagement;
-using CommonModels.Hike;
+using Common.Models.Hike;
 
 namespace DetailServices.Builders
 {
@@ -7,6 +7,7 @@ namespace DetailServices.Builders
     {
         public IDetailService<T> DetailService { get; set; }
         public ICacheService CacheService { get; set; }
+
         public DetailBuilder(IDetailService<T> detailService, ICacheService cacheService)
         {
             DetailService = detailService;

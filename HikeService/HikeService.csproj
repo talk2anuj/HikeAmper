@@ -125,17 +125,15 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\CacheManagement\CacheManagement.csproj">
       <Project>{33BA4C56-B080-4ABA-A53D-1D55E6DE3355}</Project>
       <Name>CacheManagement</Name>
     </ProjectReference>
-    <ProjectReference Include="..\CommonModels\CommonModels.csproj">
+    <ProjectReference Include="..\Common\Common.csproj">
       <Project>{aec7fa8a-3373-4dad-9879-02d0f6092f40}</Project>
-      <Name>CommonModels</Name>
+      <Name>Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\DetailServices\DetailServices.csproj">
       <Project>{6B83B504-BB23-43BC-8C21-D2AF507CDC66}</Project>
@@ -145,9 +143,6 @@
       <Project>{5A262922-F348-4C51-A680-C55351A05654}</Project>
       <Name>Storage</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

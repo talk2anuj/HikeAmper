@@ -1,11 +1,12 @@
 ﻿using Microsoft.WindowsAzure.Storage.Table;
 using Newtonsoft.Json;
 
-namespace CommonModels.Storage
+namespace Common.Models.Storage
 {
     public class DetailEntity<T> : TableEntity
     {
         public string Detail { get; set; }
+
         public DetailEntity()
         {
         }

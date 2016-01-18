@@ -1,10 +1,9 @@
-﻿using System;
-using CommonModels.Common;
-using CommonModels.Hike;
-using CommonModels.Map;
-using CommonModels.Weather;
+﻿using Common.Models.Hike;
+using Common.Models.Map;
+using Common.Models.Weather;
 using DetailServices.Utilities;
 using Newtonsoft.Json;
+using System;
 
 namespace DetailServices.impl
 {
@@ -20,6 +19,7 @@ namespace DetailServices.impl
             string json = WebClientUtility.GetJsonString(locationUrl);
             summary.WeatherDetails = Get4DaysForecast(json);
         }
+
         private WeatherDetails[] Get4DaysForecast(string json)
         {
             try

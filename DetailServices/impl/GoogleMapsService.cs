@@ -1,13 +1,12 @@
-﻿using System;
-using CommonModels.Common;
-using CommonModels.Hike;
-using CommonModels.Map;
+﻿using Common.Models.Hike;
+using Common.Models.Map;
 using DetailServices.Utilities;
 using Newtonsoft.Json;
+using System;
 
 namespace DetailServices.impl
 {
-    public class GoogleMapsService: IDetailService<MapDetails>
+    public class GoogleMapsService : IDetailService<MapDetails>
     {
         public const string Api = " https://maps.googleapis.com/maps/api/directions/json?";
 
@@ -31,6 +30,7 @@ namespace DetailServices.impl
             }
             summary.MapDetails = mapDetails;
         }
+
         private string GetUrl(PhysicalAddress source, GeographicalLocation destination)
         {
             return Api + "origin=" + source.Zip + "&destination=" + destination.Latitude + "," + destination.Longitude;

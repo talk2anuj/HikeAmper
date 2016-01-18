@@ -1,6 +1,6 @@
-﻿using CommonModels.Map;
+﻿using Common.Models.Map;
 
-namespace CommonModels.Hike
+namespace Common.Models.Hike
 {
     public class HikeDetails
     {

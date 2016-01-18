@@ -1,9 +1,9 @@
-﻿using CommonModels.Map;
+﻿using Common.Models.Map;
 using Microsoft.WindowsAzure.Storage.Table;
 
-namespace CommonModels.Storage
+namespace Common.Models.Storage
 {
-    public class UserDataEntity: TableEntity
+    public class UserDataEntity : TableEntity
     {
         public string User { get; set; }
         public string Zip { get; set; }

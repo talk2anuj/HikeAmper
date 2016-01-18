@@ -7,8 +7,8 @@
     <ProjectGuid>{AEC7FA8A-3373-4DAD-9879-02D0F6092F40}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CommonModels</RootNamespace>
-    <AssemblyName>CommonModels</AssemblyName>
+    <RootNamespace>Common</RootNamespace>
+    <AssemblyName>Common</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -68,28 +68,29 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Common\Details.cs" />
+    <Compile Include="Details.cs" />
     <Compile Include="Constants.cs" />
-    <Compile Include="Hike\HikeDetails.cs" />
-    <Compile Include="Hike\HikeSummary.cs" />
-    <Compile Include="Hike\TripDetails.cs" />
-    <Compile Include="Map\GeographicalLocation.cs" />
-    <Compile Include="Map\MapDetails.cs" />
-    <Compile Include="Map\PhysicalAddress.cs" />
+    <Compile Include="Models\Hike\HikeDetails.cs" />
+    <Compile Include="Models\Hike\HikeSummary.cs" />
+    <Compile Include="Models\Hike\TripDetails.cs" />
+    <Compile Include="Models\Map\GeographicalLocation.cs" />
+    <Compile Include="Models\Map\MapDetails.cs" />
+    <Compile Include="Models\Map\PhysicalAddress.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StorageUtility.cs" />
-    <Compile Include="Storage\DetailEntity.cs" />
-    <Compile Include="Storage\HikeDataEntity.cs" />
-    <Compile Include="Storage\StorageType.cs" />
-    <Compile Include="Storage\UserDataEntity.cs" />
-    <Compile Include="Weather\WeatherData.cs" />
+    <Compile Include="Models\Storage\DetailEntity.cs" />
+    <Compile Include="Models\Storage\HikeDataEntity.cs" />
+    <Compile Include="Models\Storage\StorageType.cs" />
+    <Compile Include="Models\Storage\UserDataEntity.cs" />
+    <Compile Include="Models\Weather\WeatherData.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
   </Target>

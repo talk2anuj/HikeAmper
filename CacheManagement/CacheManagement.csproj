@@ -82,9 +82,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CommonModels\CommonModels.csproj">
-      <Project>{AEC7FA8A-3373-4DAD-9879-02D0F6092F40}</Project>
-      <Name>CommonModels</Name>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{aec7fa8a-3373-4dad-9879-02d0f6092f40}</Project>
+      <Name>Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\Storage\Storage.csproj">
       <Project>{5A262922-F348-4C51-A680-C55351A05654}</Project>

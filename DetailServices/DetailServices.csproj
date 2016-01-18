@@ -64,15 +64,16 @@
       <Project>{33BA4C56-B080-4ABA-A53D-1D55E6DE3355}</Project>
       <Name>CacheManagement</Name>
     </ProjectReference>
-    <ProjectReference Include="..\CommonModels\CommonModels.csproj">
+    <ProjectReference Include="..\Common\Common.csproj">
       <Project>{aec7fa8a-3373-4dad-9879-02d0f6092f40}</Project>
-      <Name>CommonModels</Name>
+      <Name>Common</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
