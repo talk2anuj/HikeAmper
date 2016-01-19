@@ -13,7 +13,12 @@ namespace HikeService.Controllers
             var result = _storageService.GetEntity(entity);
             HttpContext.Current.Response.AddHeader("Access-Control-Allow-Origin", "*");
 
-            return ((UserDataEntity)result.Result).ZipCode;
+            if (result.Result != null)
+            {
+                return ((UserDataEntity)result.Result).ZipCode;
+            }
+
+            return "Add zip code";
         }
 
         public bool Post(string userName, [FromBody] InputData data)

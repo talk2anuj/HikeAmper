@@ -13,53 +13,55 @@
 
 <input type="hidden" id="user" value="@HttpContext.Current.User.Identity.Name">
 
-<!-- Enter Zip code -->
-<div class="row">
-    <div class="col-md-4">
-        <!-- ko ifnot: ZipCodeAvailable -->
-        <h2>Enter Zip Code</h2>
-        <!-- /ko -->
-        <!-- ko if: ZipCodeAvailable -->
-        <h2>Your Zip Code</h2>
-        <!-- /ko -->
-        <p>
-            This zip code will be used to find the distance to Trailhead.
-        </p>
-        <!-- ko ifnot: ZipCodeAvailable -->
-        <input type="text" data-bind="value: ZipCode" />
-        <input type="button" class="btn btn-primary" onclick="AddZipCode()" value="Submit" />
-        <!-- /ko -->
-        <!-- ko if: ZipCodeAvailable -->
-        <input type="text" id="zipCode" data-bind="value: ZipCode" />
-        <input type="button" class="btn-link" onclick="EditZipCode()" value="Edit" />
-        <!-- /ko -->
-        <br />
-        <div style="display: none;" data-bind="visible: true">
-            <!-- ko if: InvalidZipcode -->
-            <span style="color: red">Invalid Zipcode!</span>
+<div>
+    <table>
+        <tr>
+            <td>
+                <div class="col-md-8">
+                    <h2>Add a hike</h2>
+                    <p>
+                        Find a hike from WTA and add it to the list of your hikes by entering the URL.
+                    </p>
+                    <input type="text" data-bind="value: HikeUrl" />
+                    <input type="button" class="btn btn-primary" onclick="AddHike()" value="Submit" />
+                    <br />
+                    <div style="display: none;" data-bind="visible: true">
+                        <!-- ko if: HikeExists -->
+                        <span style="color: red">Hike is already present!</span>
+                        <!-- /ko -->
+                    </div>
+                </div>
+            </td>
+            <!-- ko if: DisplayZipCode -->
+            <td>
+                <div class="col-lg-offset-2">
+                    <h2>Your Zip Code</h2>
+                    <p>
+                        This zip code will be used to find the distance to Trailhead.
+                    </p>
+                    <input type="text" id="zipCode" data-bind="value: ZipCode" />
+                    <!-- ko ifnot: ZipCodeAvailable -->
+                    <input type="button" class="btn-link" onclick="AddZipCode()" value="Submit" />
+                    <input type="button" class="btn-link" onclick="CancelEdit()" value="Cancel" />
+                    <!-- /ko -->
+                    <!-- ko if: ZipCodeAvailable -->
+                    <input type="button" class="btn-link" onclick="EditZipCode()" value="Edit" />
+                    <!-- /ko -->
+                    <br />
+                    <div style="display: none;" data-bind="visible: true">
+                        <!-- ko if: InvalidZipcode -->
+                        <span style="color: red">Invalid Zipcode!</span>
+                        <!-- /ko -->
+                    </div>
+                </div>
+            </td>
             <!-- /ko -->
-        </div>
-    </div>
+        </tr>
+    </table>
 </div>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Add a hike</h2>
-        <p>
-            Find a hike from WTA and add it to the list of your hikes by entering the URL.
-        </p>
-        <input type="text" data-bind="value: HikeUrl" />
-        <input type="button" class="btn btn-primary" onclick="AddHike()" value="Submit" />
-        <br />
-        <div style="display: none;" data-bind="visible: true">
-            <!-- ko if: HikeExists -->
-            <span style="color: red">Hike is already present!</span>
-            <!-- /ko -->
-        </div>
-    </div>
-</div>
-
-<div style="display: none;" data-bind="visible: true">
+<!-- ko if: DisplayHikes -->
+<div data-bind="visible: true">
     <!-- ko if: summary().length > 0 -->
     <h2>My Hike Details</h2>
 
@@ -163,3 +165,4 @@
     </p>
     <!-- /ko -->
 </div>
+<!-- /ko -->

@@ -4,6 +4,9 @@ var HikeExists = ko.observable(false);
 var ZipCode = ko.observable("");
 var InvalidZipcode = ko.observable(false);
 var ZipCodeAvailable = ko.observable(false);
+var DisplayZipCode = ko.observable(false);
+var DisplayHikes = ko.observable(false);
+var PreviousZipCode;
 
 function GetName() {
     var user = document.getElementById("user").defaultValue;
@@ -11,17 +14,39 @@ function GetName() {
     return user;
 }
 
+function IsInvalidZipCode() {
+    return !(/(^\d{5}$)|(^\d{5}-\d{4}$)/.test(ZipCode()));
+}
+
 $(document).ready(function () {
-    var user = GetName();
+    var userName = GetName();
     HikeExists(false);
+    document.getElementById("zipCode").disabled = true;
+    ZipCodeAvailable(false);
+
     $.ajax({
-        url: "https://hikeservice.azurewebsites.net/hikes/" + user,
+        url: "https://hikeservice.azurewebsites.net/user/" + userName,
+        contentType: "application/json",
+        type: "GET",
+        async: false,
+        success: function (data) {
+            ZipCode(data);
+            ZipCodeAvailable(true);
+            DisplayZipCode(true);
+        },
+        error: function () {
+            alert("error occurred");
+        }
+    });
+    $.ajax({
+        url: "https://hikeservice.azurewebsites.net/hikes/" + userName,
         contentType: "application/json",
         type: "GET",
         async: false,
         success: function (data) {
             summary = ko.mapping.fromJS(data);
             ko.applyBindings(summary);
+            DisplayHikes(true);
         },
         error: function () {
             alert("error occurred");
@@ -32,8 +57,7 @@ $(document).ready(function () {
 function AddZipCode() {
     InvalidZipcode(IsInvalidZipCode());
     var user = GetName();
-    var data = "{\"Value\":\"" + ZipCode() + "\"}"
-    ZipCodeAvailable(false);
+    var data = "{\"Value\":\"" + ZipCode() + "\"}";
 
     $.ajax({
         url: "https://hikeservice.azurewebsites.net/user/" + user,
@@ -41,13 +65,12 @@ function AddZipCode() {
         type: "POST",
         data: data,
         async: false,
-        success: function (data) {
+        success: function () {
             // TODO: show a message saying Zipcode was added.
             ZipCodeAvailable(true);
             document.getElementById("zipCode").disabled = true;
         },
         error: function (jqxhr, textStatus, errorThrown) {
-            ZipCodeAvailable(false);
             // TODO: handle error output.
             console.log(textStatus);
             console.log(errorThrown);
@@ -55,15 +78,16 @@ function AddZipCode() {
     });
 }
 
-function IsInvalidZipCode() {
-    return !(/(^\d{5}$)|(^\d{5}-\d{4}$)/.test(ZipCode()));
+function EditZipCode() {
+    PreviousZipCode = ZipCode();
+    document.getElementById("zipCode").disabled = false;
+    ZipCodeAvailable(false);
 }
 
-function EditZipCode() {
-    var user = GetName();
-    document.getElementById("zipCode").disabled = false;
-    var data = "{\"Value\":\"" + ZipCode() + "\"}"
-    ZipCodeAvailable(false);
+function CancelEdit() {
+    document.getElementById("zipCode").disabled = true;
+    ZipCode(PreviousZipCode);
+    ZipCodeAvailable(true);
 }
 
 function AddHike() {

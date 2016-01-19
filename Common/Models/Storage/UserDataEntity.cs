@@ -18,5 +18,9 @@ namespace Common.Models.Storage
             PartitionKey = userName;
             RowKey = userName;
         }
+
+        public UserDataEntity()
+        {
+        }
     }
 }
