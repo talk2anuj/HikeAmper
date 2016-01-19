@@ -25,10 +25,10 @@ namespace HikeService.Factories
             _hikeRedisCacheService = new RedisCacheService<HikeDetails>("redishikecache");
             _mapsRedisCacheService = new RedisCacheService<MapDetails>("redismapcache");
             _tripRedisCacheService = new RedisCacheService<TripDetails>("redistripcache");
-            _hikeAzureStorageCacheService = new AzureStorageCacheService<HikeDetails>(Constants.HikeServiceStorage, Constants.HikeDetailsTableName);
-            _tripAzureStorageCacheService = new AzureStorageCacheService<TripDetails>(Constants.HikeServiceStorage, Constants.TripDetailsTableName);
-            _weatherAzureStorageCacheService = new AzureStorageCacheService<WeatherDetails[]>(Constants.HikeServiceStorage, Constants.WeatherDetailsTableName);
-            _mapAzureStorageCacheService = new AzureStorageCacheService<MapDetails>(Constants.HikeServiceStorage, Constants.MapDetailsTableName);
+            _hikeAzureStorageCacheService = new AzureStorageCacheService<HikeDetails>(Constants.StorageAccountName, Constants.HikeDetailsTableName);
+            _tripAzureStorageCacheService = new AzureStorageCacheService<TripDetails>(Constants.StorageAccountName, Constants.TripDetailsTableName);
+            _weatherAzureStorageCacheService = new AzureStorageCacheService<WeatherDetails[]>(Constants.StorageAccountName, Constants.WeatherDetailsTableName);
+            _mapAzureStorageCacheService = new AzureStorageCacheService<MapDetails>(Constants.StorageAccountName, Constants.MapDetailsTableName);
             _stubCacheService = new StubCacheService();
         }
 

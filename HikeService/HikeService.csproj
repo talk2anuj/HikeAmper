@@ -107,6 +107,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\ResourceController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Factories\CacheFactory.cs" />
     <Compile Include="Factories\StorageFactory.cs" />
     <Compile Include="Factories\BuilderFactory.cs" />

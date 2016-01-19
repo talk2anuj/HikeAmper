@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.WindowsAzure.Storage;
+using Microsoft.WindowsAzure.Storage.Table;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
-using Microsoft.WindowsAzure.Storage;
-using Microsoft.WindowsAzure.Storage.Table;
 
 namespace Storage.impl
 {
@@ -10,9 +10,10 @@ namespace Storage.impl
     {
         public CloudTableClient Client { get; set; }
         public CloudTable Table { get; set; }
-        public AzureDataStorageService(string storageName, string tableName)
+
+        public AzureDataStorageService(string storageAccountName, string tableName)
         {
-            string connectionString = ConfigurationManager.ConnectionStrings[storageName].ConnectionString;
+            string connectionString = ConfigurationManager.ConnectionStrings[storageAccountName].ConnectionString;
             CloudStorageAccount storageAccount = CloudStorageAccount.Parse(connectionString);
             Client = storageAccount.CreateCloudTableClient();
             InitializeTable(tableName);

@@ -2,7 +2,7 @@
 {
     public static class StorageUtility
     {
-        public static string ParseRowKey(string fullUrl)
+        public static string GetHikeName(string fullUrl)
         {
             string name = null;
             string[] tokens = fullUrl.Split('/');

@@ -1,5 +1,4 @@
 ﻿using System.Web.Http;
-using Common;
 
 namespace HikeService
 {
@@ -12,9 +11,15 @@ namespace HikeService
 
             config.Routes.MapHttpRoute(
                 name: "HikesApi",
-                routeTemplate: "hikes/{user}/{continuationToken}",
-                defaults: new { controller = "hikes", type = Constants.HikesType, continuationToken = "0" }
+                routeTemplate: "hikes/{user}",
+                defaults: new { controller = "hikes" }
             );
-		}
+
+            config.Routes.MapHttpRoute(
+                name: "UsersApi",
+                routeTemplate: "user/{userName}",
+                defaults: new { controller = "user" }
+            );
+        }
     }
 }

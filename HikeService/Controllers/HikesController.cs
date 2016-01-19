@@ -10,7 +10,7 @@ using System.Web.Http;
 
 namespace HikeService.Controllers
 {
-    public class HikesController : ApiController
+    public class HikesController : ResourceController
     {
         public List<HikeSummary> Get(string user)
         {
@@ -48,13 +48,6 @@ namespace HikeService.Controllers
             HikeDataEntity entity = new HikeDataEntity(user, data.Value);
             HttpContext.Current.Response.AddHeader("Access-Control-Allow-Origin", "*");
             return dataStorageService.DeleteEntity(entity);
-        }
-
-        public void Options()
-        {
-            HttpContext.Current.Response.AddHeader("Access-Control-Allow-Origin", "*");
-            HttpContext.Current.Response.AddHeader("Access-Control-Allow-Methods", "POST, GET, DELETE, OPTIONS");
-            HttpContext.Current.Response.AddHeader("Access-Control-Allow-Headers", "Content-Type");
         }
     }
 

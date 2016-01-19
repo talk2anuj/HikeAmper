@@ -10,7 +10,7 @@ namespace Common.Models.Storage
         {
             Url = fullUrl;
             PartitionKey = user;
-            RowKey = StorageUtility.ParseRowKey(fullUrl);
+            RowKey = StorageUtility.GetHikeName(fullUrl);
         }
 
         public HikeDataEntity()

@@ -12,7 +12,7 @@ namespace UpdateDetailService.Factories
 
         static StorageFactory()
         {
-            _azureHikeStorageService = new AzureDataStorageService(Constants.HikeServiceStorage, Constants.HikesTableName);
+            _azureHikeStorageService = new AzureDataStorageService(Constants.StorageAccountName, Constants.HikesTableName);
             _fileHikeStorageService = new FileDataStorageService();
         }
 

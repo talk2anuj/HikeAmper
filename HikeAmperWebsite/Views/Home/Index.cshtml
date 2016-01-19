@@ -13,18 +13,36 @@
 
 <input type="hidden" id="user" value="@HttpContext.Current.User.Identity.Name">
 
+<!-- Enter Zip code -->
+<div class="row">
+    <div class="col-md-4">
+        <h2>Enter Zip Code</h2>
+        <p>
+            This zip code will be used to find the distance to Trailhead.
+        </p>
+        <input type="text" data-bind="value: ZipCode" />
+        <input type="button" class="btn btn-primary" onclick="AddZipCode()" value="Submit" />
+        <br />
+        <div style="display: none;" data-bind="visible: true">
+            <!-- ko if: InvalidZipcode -->
+            <span style="color: red">Invalid Zipcode!</span>
+            <!-- /ko -->
+        </div>
+    </div>
+</div>
+
 <div class="row">
     <div class="col-md-4">
         <h2>Add a hike</h2>
         <p>
             Find a hike from WTA and add it to the list of your hikes by entering the URL.
         </p>
-        <input type="text" data-bind="value: HikeUrl"/>
-        <input type="button" class="btn btn-primary" onclick="AddHike()" value="Submit"/>
-        <br/>
+        <input type="text" data-bind="value: HikeUrl" />
+        <input type="button" class="btn btn-primary" onclick="AddHike()" value="Submit" />
+        <br />
         <div style="display: none;" data-bind="visible: true">
             <!-- ko if: HikeExists -->
-                <span style="color: red">Hike is already present!</span>
+            <span style="color: red">Hike is already present!</span>
             <!-- /ko -->
         </div>
     </div>
@@ -124,7 +142,7 @@
                 <td>
                     @*                @using (Html.BeginForm("Delete", "Hike"))*@
                     @*                {*@
-                    @*                    <input type="hidden" id="deleteUrl" data-bind="attr: {value: HikeDetails.Url}"/>*@
+                    @*                    <input type="hidden" id="deleteUrl" data-bind="attr: {value: HikeDetails.Url}" />*@
                     <input type="image" src="~/Images/trash.png" data-bind="click: DeleteHike.bind()" />
                     @*                    <input type="image" src="~/Images/trash.png" name="Delete" value="Delete" />*@
                     @*                }*@

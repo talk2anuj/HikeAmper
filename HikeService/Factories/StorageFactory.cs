@@ -8,11 +8,14 @@ namespace HikeService.Factories
     public class StorageFactory
     {
         private static AzureDataStorageService _azureHikeStorageService;
+        private static AzureDataStorageService _azureUserStorageService;
+
         private static FileDataStorageService _fileHikeStorageService;
 
         static StorageFactory()
         {
-            _azureHikeStorageService = new AzureDataStorageService(Constants.HikeServiceStorage, Constants.HikesTableName);
+            _azureHikeStorageService = new AzureDataStorageService(Constants.StorageAccountName, Constants.HikesTableName);
+            _azureUserStorageService = new AzureDataStorageService(Constants.StorageAccountName, Constants.UserDataTableName);
             _fileHikeStorageService = new FileDataStorageService();
         }
 
@@ -37,6 +40,12 @@ namespace HikeService.Factories
             {
                 return _azureHikeStorageService;
             }
+
+            if (typeof(T) == typeof(UserDataEntity))
+            {
+                return _azureUserStorageService;
+            }
+
             return null;
         }
     }

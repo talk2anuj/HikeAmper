@@ -13,14 +13,14 @@ namespace Common.Models.Storage
 
         public DetailEntity(string partitionKey)
         {
-            PartitionKey = StorageUtility.ParseRowKey(partitionKey);
-            RowKey = StorageUtility.ParseRowKey(partitionKey);
+            PartitionKey = StorageUtility.GetHikeName(partitionKey);
+            RowKey = StorageUtility.GetHikeName(partitionKey);
         }
 
         public DetailEntity(string partitionKey, T detail)
         {
-            PartitionKey = StorageUtility.ParseRowKey(partitionKey);
-            RowKey = StorageUtility.ParseRowKey(partitionKey);
+            PartitionKey = StorageUtility.GetHikeName(partitionKey);
+            RowKey = StorageUtility.GetHikeName(partitionKey);
             Detail = JsonConvert.SerializeObject(detail);
         }
     }
