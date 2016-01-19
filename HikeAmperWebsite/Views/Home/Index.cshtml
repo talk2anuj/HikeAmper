@@ -16,12 +16,23 @@
 <!-- Enter Zip code -->
 <div class="row">
     <div class="col-md-4">
+        <!-- ko ifnot: ZipCodeAvailable -->
         <h2>Enter Zip Code</h2>
+        <!-- /ko -->
+        <!-- ko if: ZipCodeAvailable -->
+        <h2>Your Zip Code</h2>
+        <!-- /ko -->
         <p>
             This zip code will be used to find the distance to Trailhead.
         </p>
+        <!-- ko ifnot: ZipCodeAvailable -->
         <input type="text" data-bind="value: ZipCode" />
         <input type="button" class="btn btn-primary" onclick="AddZipCode()" value="Submit" />
+        <!-- /ko -->
+        <!-- ko if: ZipCodeAvailable -->
+        <input type="text" id="zipCode" data-bind="value: ZipCode" />
+        <input type="button" class="btn-link" onclick="EditZipCode()" value="Edit" />
+        <!-- /ko -->
         <br />
         <div style="display: none;" data-bind="visible: true">
             <!-- ko if: InvalidZipcode -->
@@ -140,12 +151,7 @@
                 </td>
                 <td data-bind="text: HikeDetails.PassRequired"></td>
                 <td>
-                    @*                @using (Html.BeginForm("Delete", "Hike"))*@
-                    @*                {*@
-                    @*                    <input type="hidden" id="deleteUrl" data-bind="attr: {value: HikeDetails.Url}" />*@
                     <input type="image" src="~/Images/trash.png" data-bind="click: DeleteHike.bind()" />
-                    @*                    <input type="image" src="~/Images/trash.png" name="Delete" value="Delete" />*@
-                    @*                }*@
                 </td>
             </tr>
     </table>

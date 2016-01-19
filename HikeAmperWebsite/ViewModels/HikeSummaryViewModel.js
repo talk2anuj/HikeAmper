@@ -3,6 +3,7 @@ var HikeUrl = ko.observable("");
 var HikeExists = ko.observable(false);
 var ZipCode = ko.observable("");
 var InvalidZipcode = ko.observable(false);
+var ZipCodeAvailable = ko.observable(false);
 
 function GetName() {
     var user = document.getElementById("user").defaultValue;
@@ -32,6 +33,7 @@ function AddZipCode() {
     InvalidZipcode(IsInvalidZipCode());
     var user = GetName();
     var data = "{\"Value\":\"" + ZipCode() + "\"}"
+    ZipCodeAvailable(false);
 
     $.ajax({
         url: "https://hikeservice.azurewebsites.net/user/" + user,
@@ -41,9 +43,11 @@ function AddZipCode() {
         async: false,
         success: function (data) {
             // TODO: show a message saying Zipcode was added.
-            // TODO: show a link to edit zipcode.
+            ZipCodeAvailable(true);
+            document.getElementById("zipCode").disabled = true;
         },
         error: function (jqxhr, textStatus, errorThrown) {
+            ZipCodeAvailable(false);
             // TODO: handle error output.
             console.log(textStatus);
             console.log(errorThrown);
@@ -53,6 +57,13 @@ function AddZipCode() {
 
 function IsInvalidZipCode() {
     return !(/(^\d{5}$)|(^\d{5}-\d{4}$)/.test(ZipCode()));
+}
+
+function EditZipCode() {
+    var user = GetName();
+    document.getElementById("zipCode").disabled = false;
+    var data = "{\"Value\":\"" + ZipCode() + "\"}"
+    ZipCodeAvailable(false);
 }
 
 function AddHike() {

@@ -4,14 +4,19 @@ namespace Common.Models.Storage
 {
     public class UserDataEntity : TableEntity
     {
-        public UserDataEntity(string user, string zipCode)
+        public string ZipCode { get; set; }
+
+        public UserDataEntity(string userName, string zipCode)
         {
-            PartitionKey = user;
-            RowKey = zipCode;
+            PartitionKey = userName;
+            RowKey = userName;
+            ZipCode = zipCode;
         }
 
-        public UserDataEntity()
+        public UserDataEntity(string userName)
         {
+            PartitionKey = userName;
+            RowKey = userName;
         }
     }
 }

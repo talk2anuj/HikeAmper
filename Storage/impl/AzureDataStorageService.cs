@@ -62,10 +62,10 @@ namespace Storage.impl
             return result;
         }
 
-        public void UpdateEntity<T>(T entity)
+        public bool UpdateEntity<T>(T entity)
         {
             var tableEntity = entity as TableEntity;
-            UpdateEntity(tableEntity);
+            return UpdateEntity(tableEntity);
         }
 
         public bool DeleteEntity<T>(T entity)
@@ -118,14 +118,15 @@ namespace Storage.impl
         private bool InsertEntity(TableEntity e)
         {
             TableOperation op = TableOperation.Insert(e);
-            TableResult entity = Table.Execute(op);
+            var entity = Table.Execute(op);
             return (entity.Result != null);
         }
 
-        private void UpdateEntity(TableEntity e)
+        private bool UpdateEntity(TableEntity e)
         {
             TableOperation op = TableOperation.InsertOrReplace(e);
-            Table.Execute(op);
+            var entity = Table.Execute(op);
+            return (entity.Result != null);
         }
 
         private bool DeleteEntity(TableEntity e)
