@@ -1,10 +1,9 @@
 ﻿using Common.Models.Hike;
 using Common.Models.Map;
 using Common.Models.Weather;
-using DetailServices;
 using DetailServices.impl;
 
-namespace HikeService.Factories
+namespace DetailServices.Factories
 {
     internal static class ServiceFactory
     {

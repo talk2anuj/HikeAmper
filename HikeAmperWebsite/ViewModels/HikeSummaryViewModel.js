@@ -56,11 +56,11 @@ $(document).ready(function () {
 
 function AddZipCode() {
     InvalidZipcode(IsInvalidZipCode());
-    var user = GetName();
+    var userName = GetName();
     var data = "{\"Value\":\"" + ZipCode() + "\"}";
 
     $.ajax({
-        url: "https://hikeservice.azurewebsites.net/user/" + user,
+        url: "https://hikeservice.azurewebsites.net/user/" + userName,
         contentType: "application/json",
         type: "POST",
         data: data,
@@ -69,6 +69,7 @@ function AddZipCode() {
             // TODO: show a message saying Zipcode was added.
             ZipCodeAvailable(true);
             document.getElementById("zipCode").disabled = true;
+            UpdateHikeDetails();
         },
         error: function (jqxhr, textStatus, errorThrown) {
             // TODO: handle error output.
@@ -78,8 +79,30 @@ function AddZipCode() {
     });
 }
 
+function UpdateHikeDetails() {
+    //    var userName = GetName();
+    //    $.ajax({
+    //        url: "https://hikeservice.azurewebsites.net/hikes/" + userName,
+    //        contentType: "application/json",
+    //        type: "GET",
+    //        async: false,
+    //        success: function (data) {
+    //            data = ko.mapping.fromJS(data);
+    //            summary(data);
+    //        },
+    //        error: function () {
+    //            alert("error occurred");
+    //        }
+    //    });
+    //TODO: HACK untill view model is fixed to update page
+    location.reload();
+}
+
 function EditZipCode() {
     PreviousZipCode = ZipCode();
+    if (IsInvalidZipCode(ZipCode())) {
+        ZipCode("");
+    }
     document.getElementById("zipCode").disabled = false;
     ZipCodeAvailable(false);
 }

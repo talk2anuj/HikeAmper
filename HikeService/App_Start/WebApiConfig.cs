@@ -11,7 +11,7 @@ namespace HikeService
 
             config.Routes.MapHttpRoute(
                 name: "HikesApi",
-                routeTemplate: "hikes/{user}",
+                routeTemplate: "hikes/{userName}",
                 defaults: new { controller = "hikes" }
             );
 

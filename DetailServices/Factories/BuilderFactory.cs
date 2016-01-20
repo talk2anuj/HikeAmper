@@ -4,9 +4,9 @@ using Common.Models.Map;
 using Common.Models.Weather;
 using DetailServices.Builders;
 
-namespace HikeService.Factories
+namespace DetailServices.Factories
 {
-    internal static class BuilderFactory
+    public static class BuilderFactory
     {
         private static readonly SummaryBuilder SummaryBuilder;
 
@@ -21,7 +21,7 @@ namespace HikeService.Factories
             SummaryBuilder.HikeDetailBuilder = new DetailBuilder<HikeDetails>(ServiceFactory.GetHikeDetailService(), CacheFactory.GetHikeCacheService(CacheType.AzureStorage));
             SummaryBuilder.TripDetailBuilder = new DetailBuilder<TripDetails>(ServiceFactory.GetTripDetailService(), CacheFactory.GetTripCacheService(CacheType.AzureStorage));
             SummaryBuilder.WeatherDetailBuilder = new DetailBuilder<WeatherDetails[]>(ServiceFactory.GetWeatherDetailService(), CacheFactory.GetWeatherCacheService(CacheType.AzureStorage));
-            SummaryBuilder.MapDetailBuilder = new DetailBuilder<MapDetails>(ServiceFactory.GetMapService(), CacheFactory.GetMapCacheService(CacheType.AzureStorage));
+            SummaryBuilder.MapDetailBuilder = new DetailBuilder<MapDetails>(ServiceFactory.GetMapService(), CacheFactory.GetMapCacheService(CacheType.Stub));
             return SummaryBuilder;
         }
     }

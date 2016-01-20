@@ -3,7 +3,7 @@ using Common.Models.Storage;
 using Storage;
 using Storage.impl;
 
-namespace HikeService.Factories
+namespace DetailServices.Factories
 {
     public class StorageFactory
     {

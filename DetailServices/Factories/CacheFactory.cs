@@ -5,7 +5,7 @@ using Common.Models.Hike;
 using Common.Models.Map;
 using Common.Models.Weather;
 
-namespace HikeService.Factories
+namespace DetailServices.Factories
 {
     public class CacheFactory
     {

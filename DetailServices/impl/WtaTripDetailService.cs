@@ -8,7 +8,7 @@ namespace DetailServices.impl
     {
         private static string _tripReportUrlExtension = "/@@related_tripreport_listing";
 
-        public void PopulateDetails(string url, HikeSummary summary)
+        public void PopulateDetails(string url, HikeSummary summary, string userName)
         {
             //scrape data from WTA
             HtmlDocument tripReportDoc = WebClientUtility.GetHtmlDocument(url + _tripReportUrlExtension);

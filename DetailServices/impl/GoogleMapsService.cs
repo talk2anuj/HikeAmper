@@ -1,5 +1,7 @@
 ﻿using Common.Models.Hike;
 using Common.Models.Map;
+using Common.Models.Storage;
+using DetailServices.Factories;
 using DetailServices.Utilities;
 using Newtonsoft.Json;
 using System;
@@ -10,19 +12,21 @@ namespace DetailServices.impl
     {
         public const string Api = " https://maps.googleapis.com/maps/api/directions/json?";
 
-        public void PopulateDetails(string url, HikeSummary summary)
+        public void PopulateDetails(string url, HikeSummary summary, string userName)
         {
             GeographicalLocation destination = summary.HikeDetails.Location;
             MapDetails mapDetails = new MapDetails("Distance NA", "Duration NA");
             try
             {
-                PhysicalAddress source = new PhysicalAddress();
-                source.Zip = "98052";
-                string locationUrl = GetUrl(source, destination);
-                string json = WebClientUtility.GetJsonString(locationUrl);
-                DistanceAndDuration value = JsonConvert.DeserializeObject<DistanceAndDuration>(json);
-                mapDetails.Distance = value.Routes[0].Legs[0].Distance.Text;
-                mapDetails.Duration = value.Routes[0].Legs[0].Duration.Text;
+                var zipCode = GetZipCode(userName);
+                if (zipCode != null)
+                {
+                    string locationUrl = GetUrl(zipCode, destination);
+                    string json = WebClientUtility.GetJsonString(locationUrl);
+                    DistanceAndDuration value = JsonConvert.DeserializeObject<DistanceAndDuration>(json);
+                    mapDetails.Distance = value.Routes[0].Legs[0].Distance.Text;
+                    mapDetails.Duration = value.Routes[0].Legs[0].Duration.Text;
+                }
             }
             catch (Exception e)
             {
@@ -31,9 +35,17 @@ namespace DetailServices.impl
             summary.MapDetails = mapDetails;
         }
 
-        private string GetUrl(PhysicalAddress source, GeographicalLocation destination)
+        private string GetUrl(string zipCode, GeographicalLocation destination)
         {
-            return Api + "origin=" + source.Zip + "&destination=" + destination.Latitude + "," + destination.Longitude;
+            return Api + "origin=" + zipCode + "&destination=" + destination.Latitude + "," + destination.Longitude;
+        }
+
+        private string GetZipCode(string userName)
+        {
+            var storageService = StorageFactory.GetStorageService<UserDataEntity>(StorageType.AzureStorage);
+            UserDataEntity entity = new UserDataEntity(userName);
+            var result = storageService.GetEntity(entity);
+            return ((UserDataEntity)result.Result)?.ZipCode;
         }
     }
 }

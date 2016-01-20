@@ -11,7 +11,7 @@ namespace DetailServices.impl
     {
         private const string MyKey = "e4938cdd8fd24af0";
 
-        public void PopulateDetails(string url, HikeSummary summary)
+        public void PopulateDetails(string url, HikeSummary summary, string userName)
         {
             GeographicalLocation locationDetails = summary.HikeDetails.Location;
             var locationUrl = GetUrl(locationDetails);

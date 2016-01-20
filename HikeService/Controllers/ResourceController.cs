@@ -1,5 +1,5 @@
 ﻿using Common.Models.Storage;
-using HikeService.Factories;
+using DetailServices.Factories;
 using Storage;
 using System.Web;
 using System.Web.Http;
@@ -8,9 +8,9 @@ namespace HikeService.Controllers
 {
     public class ResourceController<T> : ApiController
     {
-        public IDataStorageService _storageService;
+        protected readonly IDataStorageService _storageService;
 
-        public ResourceController()
+        protected ResourceController()
         {
             _storageService = StorageFactory.GetStorageService<T>(StorageType.AzureStorage);
         }

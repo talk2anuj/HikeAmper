@@ -109,10 +109,6 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\ResourceController.cs" />
     <Compile Include="Controllers\UserController.cs" />
-    <Compile Include="Factories\CacheFactory.cs" />
-    <Compile Include="Factories\StorageFactory.cs" />
-    <Compile Include="Factories\BuilderFactory.cs" />
-    <Compile Include="Factories\ServiceFactory.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -141,7 +137,7 @@
       <Name>Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\DetailServices\DetailServices.csproj">
-      <Project>{6B83B504-BB23-43BC-8C21-D2AF507CDC66}</Project>
+      <Project>{6b83b504-bb23-43bc-8c21-d2af507cdc66}</Project>
       <Name>DetailServices</Name>
     </ProjectReference>
     <ProjectReference Include="..\Storage\Storage.csproj">

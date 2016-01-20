@@ -5,8 +5,8 @@ namespace DetailServices.Builders
 {
     public class DetailBuilder<T>
     {
-        public IDetailService<T> DetailService { get; set; }
-        public ICacheService CacheService { get; set; }
+        private IDetailService<T> DetailService { get; set; }
+        private ICacheService CacheService { get; set; }
 
         public DetailBuilder(IDetailService<T> detailService, ICacheService cacheService)
         {
@@ -14,11 +14,11 @@ namespace DetailServices.Builders
             CacheService = cacheService;
         }
 
-        public void Build(string user, string url, HikeSummary hikeSummary)
+        public void Build(string userName, string url, HikeSummary hikeSummary)
         {
             if (!CacheService.PopulateDetails(url, hikeSummary))
             {
-                DetailService.PopulateDetails(url, hikeSummary);
+                DetailService.PopulateDetails(url, hikeSummary, userName);
                 CacheService.AddDetails(hikeSummary);
             }
         }

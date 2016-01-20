@@ -4,6 +4,6 @@ namespace DetailServices
 {
     public interface IDetailService<T>
     {
-        void PopulateDetails(string url, HikeSummary summary);
+        void PopulateDetails(string url, HikeSummary summary, string userName);
     }
 }

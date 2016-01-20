@@ -13,8 +13,7 @@ namespace DetailServices.Builders
 
         public HikeSummary Build(string url, string user = null)
         {
-            HikeSummary hikeSummary = new HikeSummary();
-            hikeSummary.Url = url;
+            HikeSummary hikeSummary = new HikeSummary { Url = url };
             HikeDetailBuilder.Build(user, url, hikeSummary);
             TripDetailBuilder.Build(user, url, hikeSummary);
             WeatherDetailBuilder.Build(user, url, hikeSummary);
