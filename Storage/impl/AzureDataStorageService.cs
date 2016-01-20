@@ -26,30 +26,6 @@ namespace Storage.impl
             Table = table;
         }
 
-        //        public bool WriteUserData(string user, PhysicalAddress address)
-        //        {
-        //            UserDataEntity e = new UserDataEntity(user, address);
-        //            bool result = false;
-        //            if (!HasEntity(UserDataTable, e))
-        //            {
-        //                result = InsertEntity(UserDataTable, e);
-        //            }
-        //
-        //            return result;
-        //        }
-
-        //        public UserDataEntity GetUserData(string user)
-        //        {
-        //            if (UserDataTable.Exists())
-        //            {
-        //                var query = new TableQuery<UserDataEntity>().Where(TableQuery.GenerateFilterCondition("PartitionKey", QueryComparisons.Equal, user));
-        //                var entity = UserDataTable.ExecuteQuery(query).ToList();
-        //                return entity.First();
-        //            }
-        //
-        //            return null;
-        //        }
-
         public bool InsertEntity<T>(T entity)
         {
             bool result = false;
